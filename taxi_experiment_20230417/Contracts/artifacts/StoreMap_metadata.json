@@ -1,0 +1,422 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "gid",
+						"type": "uint256"
+					}
+				],
+				"name": "add_area_line",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "gid",
+						"type": "uint256"
+					},
+					{
+						"internalType": "int32",
+						"name": "minzoom",
+						"type": "int32"
+					},
+					{
+						"internalType": "int32",
+						"name": "cost",
+						"type": "int32"
+					},
+					{
+						"internalType": "int32",
+						"name": "source",
+						"type": "int32"
+					},
+					{
+						"internalType": "int32",
+						"name": "target",
+						"type": "int32"
+					},
+					{
+						"internalType": "bool",
+						"name": "oneway",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "building",
+						"type": "bool"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "highway",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "name",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "gtype",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "path",
+						"type": "bytes32[]"
+					}
+				],
+				"name": "add_onetype",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "adjacencyList",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "adjnum",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "startGeohash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "endGeohash",
+						"type": "bytes32"
+					}
+				],
+				"name": "astar",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "backwards",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "costAll",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newP",
+						"type": "uint256"
+					}
+				],
+				"name": "changeP",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newPrecision",
+						"type": "uint256"
+					}
+				],
+				"name": "changePrecision",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "dequeue",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "geohash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "cost",
+						"type": "uint256"
+					}
+				],
+				"name": "enqueue",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "geo_maps",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "num",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "geohash",
+						"type": "string"
+					}
+				],
+				"name": "getLatBlock",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "geohash",
+						"type": "string"
+					}
+				],
+				"name": "getLonBlock",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "hash",
+						"type": "bytes32"
+					}
+				],
+				"name": "get_types",
+				"outputs": [
+					{
+						"internalType": "int32[]",
+						"name": "feature",
+						"type": "int32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "names",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "highways",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "gtypes",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "path",
+						"type": "bytes32[]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "nextGeohash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "endGeohash",
+						"type": "bytes32"
+					}
+				],
+				"name": "manhattan",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "geohash1",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "geohash2",
+						"type": "bytes32"
+					}
+				],
+				"name": "sliceGeoHash",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "top",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Contracts/StoreMap.sol": "StoreMap"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Contracts/StoreMap.sol": {
+			"keccak256": "0x6930702823b580a7b673e17549c7fd857e814f4875e16b5acd31c094424c436f",
+			"urls": [
+				"bzz-raw://b0fb00bce1b240792d0474c61cfacdd9e506e1e36f35696dca9317bb19ed3733",
+				"dweb:/ipfs/QmWQhQ1cEifoR37hrwCnecxxJR6iDYR7XBi2K4yAmHLUBz"
+			]
+		}
+	},
+	"version": 1
+}
