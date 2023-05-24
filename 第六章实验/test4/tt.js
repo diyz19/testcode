@@ -166,7 +166,9 @@ async function trans_tx(from_add ,to_add) {
     sleep(2000)
 
     transfContract1.methods.IN_transf1()
-    .send({ from: from_add, gas: GAS_OFFER, position: POSITION1, txtime: 278000 })
+    .send(
+        { from: accountManagerW11, gas: GAS_OFFER, position: POSITION1, txtime: 278000 }
+        )
     .then(function (result) {
         console.log("乘客支付了订单");
 
@@ -189,7 +191,7 @@ async function trans_tx(from_add ,to_add) {
             console.log("search_Event: ", error);
         }
         transfContract.methods.OUT_transf2()
-        .send({ from: from_add, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
+        .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
         .then(function (result) {
 
             // let hash_req = hashRequests
@@ -213,7 +215,7 @@ async function trans_tx(from_add ,to_add) {
     })
     transfContract.events.OUT_Event2(function (error, event) {
         transfContract1.methods.IN_transf3()
-        .send({ from: from_add, gas: GAS_OFFER, position: POSITION1, txtime: 278000 })
+        .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION1, txtime: 278000 })
         .then(function (result) {
             // web31.eth.sendTransaction({ from: accountManagerW11, to: ve_id, value: VALUE, position: inpos, txtype: 3, txtime: Date.now(), exdata: txouthash }
             web31.eth.sendTransaction({ from: accountManagerW11, to: to_add, value: VALUE, position: POSITION1, txtype: 3, txtime: Date.now() }
@@ -236,7 +238,7 @@ async function trans_tx(from_add ,to_add) {
 
     transfContract1.events.IN_Event3(function (error, event) {
         transfContract.methods.OUT_transf4()
-        .send({ from: from_add, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
+        .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
         .then(function (result) {
             // outweb3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: outpos, txtype: 4, txtime: Date.now(), exdata: txinhash }
             web3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: POSITION, txtype: 4, txtime: Date.now()}
