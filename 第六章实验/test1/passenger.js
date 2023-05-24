@@ -147,13 +147,10 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, 
     let getVehicleTime1 = Date.now()
     // console.log("regionVehicles: ", regionVehicles);
     console.log("positionGeohash: ", positionGeohash);
-    // trafficContract.methods.getVehicleByRegion(
-    //     web3.utils.asciiToHex(positionGeohash),
-    //     regionVehicles
-    // )    
-    trafficContract.methods.getVehicle(
-        web3.utils.asciiToHex(positionGeohash)
-    )
+    trafficContract.methods.getVehicleByRegion(
+        web3.utils.asciiToHex(positionGeohash),
+        regionVehicles
+    )    
     .call(
         { from: passengerId, gas: GAS_OFFER }
     ).then(async function (result1) {

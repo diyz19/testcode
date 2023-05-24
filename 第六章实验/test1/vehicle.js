@@ -124,7 +124,8 @@ async function initUnit(vehicleId, vehiclePosition) {
             	to: vehicleId,
             	value: VALUE,
                 gas: GAS_OFFER,
-            	position:vehicleMessage.vehicleStartPosition,
+            	// position:vehicleMessage.vehicleStartPosition,
+                position:POSITION,
             	txtime:(vehicleCurrentTime + vehicleMessage.emptyAstarTime + vehicleMessage.loadAstarTime)
             }).then(function(receipt){
                 console.log(`done!!!!`);
@@ -216,8 +217,10 @@ function getVehicleIdList() {
 
 //确认接乘客
 async function pickUp(vehicleId, vehiclePosition, passengerId, passengerGeohash, vehicleMessage) {
+    console.log("IN_pickup");
     if (vehiclePosition == passengerGeohash) {
         // store route
+        // console.log("OK");
         trafficContract.methods.storeRoutes(0, vehicleId, passengerId, []).send({ from: vehicleId, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }).then(function (result) {
             console.log("存储路径成功");
             console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@DirectlyStoreRouteToStartingPointSuccess`)
@@ -230,6 +233,7 @@ async function pickUp(vehicleId, vehiclePosition, passengerId, passengerGeohash,
         vehicleMessage.emptyCountFrag = 0;//经过的路口数量
     } else {
         let astarTime1 = Date.now();
+        // console.log("FAIL");
         mapContract.methods.astar(web3.utils.asciiToHex(vehiclePosition), web3.utils.asciiToHex(passengerGeohash)).call(
             { from: vehicleId, gas: 50000000000 }
         ).then(function (result) {
@@ -243,12 +247,20 @@ async function pickUp(vehicleId, vehiclePosition, passengerId, passengerGeohash,
             }
             let astarOriginRoute = result[0];
             let routeLength = Number(result[1]);
-
+            // console.log("routeLength",routeLength)
+            // console.log("vehicleId",vehicleId)
+            // console.log("passengerId",passengerId)
+            // console.log("vehiclePosition",vehiclePosition)
+            
             trafficContract.methods.storeRoutes(routeLength, vehicleId, passengerId, astarOriginRoute).send(
-                { from: vehicleId, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }
+                // { from: vehicleId, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }
+                { from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() }
+
             ).then(function (result) {
                 console.log("存储接客路径成功");
                 console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@StoreRouteToStartingPointThroughAStarSuccess`)
+            }, function (error) {
+                console.log("存储接客路径fail")
             });
 
             let astarRoute = [];
