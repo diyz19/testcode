@@ -1,0 +1,12 @@
+rm -rf geth_wx4e/gethdata/geth
+rm -f geth_wx4e/gethdata/history
+rm -rf geth_wx4e_sdl/gethdata/geth
+rm -f geth_wx4e_sdl/gethdata/history
+rm -rf geth_wx4en/gethdata/geth
+rm -f geth_wx4en/gethdata/history
+rm -rf geth_wx4ep/gethdata/geth
+rm -f geth_wx4ep/gethdata/history
+rm -rf geth_wx4eq/gethdata/geth
+rm -f geth_wx4eq/gethdata/history
+rm -rf geth_wx4er/gethdata/geth
+rm -f geth_wx4er/gethdata/history

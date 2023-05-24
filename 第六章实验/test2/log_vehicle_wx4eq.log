@@ -1,0 +1,22 @@
+1684610461912@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@StartProcessing
+/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-helpers/lib/errors.js:28
+        var err = new Error('Returned error: ' + message);
+                  ^
+
+Error: Returned error: **warning--you are out of the blockchain!**
+    at Object.ErrorResponse (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-helpers/lib/errors.js:28:19)
+    at Object.callback (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:291:36)
+    at /home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-providers-ws/lib/index.js:114:45
+    at Array.forEach (<anonymous>)
+    at WebsocketProvider._onMessage (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-providers-ws/lib/index.js:102:69)
+    at W3CWebSocket._dispatchEvent [as dispatchEvent] (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/yaeti/lib/EventTarget.js:115:12)
+    at W3CWebSocket.onMessage (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:234:14)
+    at WebSocketConnection.<anonymous> (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:205:19)
+    at WebSocketConnection.emit (node:events:513:28)
+    at WebSocketConnection.processFrame (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/WebSocketConnection.js:554:26)
+    at /home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/WebSocketConnection.js:323:40
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  data: null
+}
+
+Node.js v18.15.0
