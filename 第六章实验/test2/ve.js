@@ -35,9 +35,9 @@ let astarErr2Messages = [];
 
 // const LOCATION = "wx4ernfyb2x"
 // const GAS_OFFER = 50_0000_0000
+// const GAS_OFFER = 1
 const GAS_OFFER = 500_0000
 const VALUE = 100_0000_0000_0000
-
 const accountManagerW11 = "0x196424dd2bf7c978228ebd7a17b38b993d650696"
 
 async function initVehicle() {
@@ -70,7 +70,7 @@ async function initUnit(vehicleId, vehiclePosition) {
     let vehicleMessage = {};
     let vehicleCurrentTime = Date.now();
     // //event
-    console.log("get_message")
+    // console.log("get_message")
     trafficContract.events.Myevent(function (error, event) {
         if (error !== null) {
             console.log("Myevent_error: ", error);
@@ -105,7 +105,8 @@ async function initUnit(vehicleId, vehiclePosition) {
             // trafficContract.methods.initVehicle(vehicleId, web3.utils.asciiToHex(vehicleMessage.endGeohash)).send({from: vehicleId, gas: 500000,position: vehicleMessage.endGeohash, txtime: (vehicleCurrentTime + vehicleMessage.emptyAstarTime + vehicleMessage.loadAstarTime)}).then(function(result){
             //     console.log("置状态为空车");
             trafficContract.methods.setVehicleStatusEmpty(vehicleId).send(
-                { from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() },
+                // { from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() },
+                { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: Date.now() },
                 function (err, _trans_hash) {
                     if (!err) {
                         console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@CarReleased`)
@@ -118,11 +119,12 @@ async function initUnit(vehicleId, vehiclePosition) {
             vehiclePosition = vehicleMessage.endGeohash;
             countNum++;
             allVehicleMessage.push(vehicleMessage);
-
+            console.log("收到转账,VALUE:",VALUE);
             web3.eth.sendTransaction({
-            	from: vehicleId,
+            	from: accountManagerW11,
+                // from: vehicleId,
             	to: vehicleId,
-            	value: VALUE,
+            	// value: VALUE,
                 gas: GAS_OFFER,
             	position:vehicleMessage.vehicleStartPosition,
             	txtime:(vehicleCurrentTime + vehicleMessage.emptyAstarTime + vehicleMessage.loadAstarTime)
@@ -158,9 +160,12 @@ async function initUnit(vehicleId, vehiclePosition) {
         }
     })
 
-    await trafficContract.methods.initVehicle(vehicleId, web3.utils.asciiToHex(vehiclePosition)).send(
-        { from: vehicleId.toString(), gas: GAS_OFFER, position: vehiclePosition.toString(), txtime: Date.now() }
-    ).then(function (err, result) {
+    await trafficContract.methods.initVehicle(vehicleId, web3.utils.asciiToHex(vehiclePosition))
+    .send(
+        // { from: vehicleId.toString(), gas: GAS_OFFER, position: vehiclePosition.toString(), txtime: Date.now() }
+        { from: accountManagerW11, gas: GAS_OFFER, position: vehiclePosition.toString(), txtime: Date.now() }
+    )
+    .then(function (err, result) {
         onlineVehicleNum++;
         // if (Date.now() >= startTime) {
         // 	console.log(`共加入了${onlineVehicleNum}辆车`);
@@ -182,13 +187,15 @@ async function deleteVehicle() {
     })
 }
 async function deleteUnit(vehicleId) {
-    return await trafficContract.methods.deleteVehicle(vehicleId).send({ from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() });
+    // return await trafficContract.methods.deleteVehicle(vehicleId).send({ from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() });
+    return await trafficContract.methods.deleteVehicle(vehicleId).send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: Date.now() });
 }
 // deleteVehicle();
 // deleteUnit("0x4c454053ce95853afc4591c3a3ad20852428c619");
 
 function getVehicleStatus(vehicleId) {
-    trafficContract.methods.getVehicleStatus(vehicleId).call({ from: vehicleId, gas: GAS_OFFER }).then(function (result) {
+    // trafficContract.methods.getVehicleStatus(vehicleId).call({ from: vehicleId, gas: GAS_OFFER }).then(function (result) {
+    trafficContract.methods.getVehicleStatus(vehicleId).call({ from: accountManagerW11, gas: GAS_OFFER }).then(function (result) {
         console.log("getVehicleStatus: ", result)
     })
 }
@@ -196,7 +203,9 @@ function getVehicleStatus(vehicleId) {
 // "0x4c454053ce95853afc4591c3a3ad20852428c619", "0x344d60bccf77f085d3a3419d53f5fae1ec660c59", "0x6eda21bfaba44045e80235eec31b9f2ee673808a"
 
 function getVehicleId(vehicleId) {
-    trafficContract.methods.getVehicleId(vehicleId).call({ from: vehicleId, gas: GAS_OFFER }).then(function (result) {
+    
+    trafficContract.methods.getVehicleId(vehicleId).call({ from: accountManagerW11, gas: GAS_OFFER }).then(function (result) {
+    // trafficContract.methods.getVehicleId(vehicleId).call({ from: vehicleId, gas: GAS_OFFER }).then(function (result) {
         console.log("getVehicleId: ", result)
     })
 }
@@ -216,7 +225,8 @@ function getVehicleIdList() {
 async function pickUp(vehicleId, vehiclePosition, passengerId, passengerGeohash, vehicleMessage) {
     if (vehiclePosition == passengerGeohash) {
         // store route
-        trafficContract.methods.storeRoutes(0, vehicleId, passengerId, []).send({ from: vehicleId, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }).then(function (result) {
+        // trafficContract.methods.storeRoutes(0, vehicleId, passengerId, []).send({ from: vehicleId, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }).then(function (result) {
+        trafficContract.methods.storeRoutes(0, vehicleId, passengerId, []).send({ from: accountManagerW11, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }).then(function (result) {
             console.log("存储路径成功");
             console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@DirectlyStoreRouteToStartingPointSuccess`)
         }, function (error) {
@@ -229,7 +239,8 @@ async function pickUp(vehicleId, vehiclePosition, passengerId, passengerGeohash,
     } else {
         let astarTime1 = Date.now();
         mapContract.methods.astar(web3.utils.asciiToHex(vehiclePosition), web3.utils.asciiToHex(passengerGeohash)).call(
-            { from: vehicleId, gas: 50000000000 }
+            // { from: vehicleId, gas: GAS_OFFER }
+            { from: accountManagerW11, gas: GAS_OFFER }
         ).then(function (result) {
             console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@FinishedAStarToStartingPoint`)
             let astarTime2 = Date.now() - astarTime1;
@@ -243,7 +254,8 @@ async function pickUp(vehicleId, vehiclePosition, passengerId, passengerGeohash,
             let routeLength = Number(result[1]);
 
             trafficContract.methods.storeRoutes(routeLength, vehicleId, passengerId, astarOriginRoute).send(
-                { from: vehicleId, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }
+                // { from: vehicleId, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }
+                { from: accountManagerW11, gas: GAS_OFFER, position: vehiclePosition, txtime: Date.now() }
             ).then(function (result) {
                 console.log("存储接客路径成功");
                 console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@StoreRouteToStartingPointThroughAStarSuccess`)
@@ -275,13 +287,16 @@ async function manageToEnd(vehicleId, passengerId, passengerGeohash, vehicleMess
 
     //车辆接到乘客后通过合约获得其目的地
     console.info("Debug:", passengerId, vehicleId)
-    trafficContract.methods.getPassengerEnd(passengerId).call({ from: vehicleId, gas: GAS_OFFER }).then(function (result) {
+    // trafficContract.methods.getPassengerEnd(passengerId).call({ from: vehicleId, gas: GAS_OFFER }).then(function (result) {
+    trafficContract.methods.getPassengerEnd(passengerId).call({ from: accountManagerW11, gas: GAS_OFFER }).then(function (result) {
+
         let endGeohash = web3.utils.hexToAscii(result).slice(0, 11);
         console.log("目的地坐标:", endGeohash);
         console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@DestinationReady`)
 
         let astarTime1 = Date.now()
-        mapContract.methods.astar(web3.utils.asciiToHex(passengerGeohash), web3.utils.asciiToHex(endGeohash)).call({ from: vehicleId, gas: 50000000000 }).then(function (result) {
+        mapContract.methods.astar(web3.utils.asciiToHex(passengerGeohash), web3.utils.asciiToHex(endGeohash)).call({ from: accountManagerW11, gas: GAS_OFFER }).then(function (result) {
+        // mapContract.methods.astar(web3.utils.asciiToHex(passengerGeohash), web3.utils.asciiToHex(endGeohash)).call({ from: vehicleId, gas: GAS_OFFER }).then(function (result) {
             console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@FinishedAStarToDestination`)
             let astarTime2 = Date.now() - astarTime1;
             let countFrag = 0;
@@ -293,7 +308,8 @@ async function manageToEnd(vehicleId, passengerId, passengerGeohash, vehicleMess
             let astarOriginRoute = result[0];
             let routeLength = Number(result[1]);
             trafficContract.methods.storeRoutes(routeLength, vehicleId, passengerId, astarOriginRoute).send(
-                { from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() }
+                // { from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() }
+                { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: Date.now() }
             ).then(function (result) {
                 console.log("存储送客路径成功");
                 console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@StoreRouteToDestinationSuccess`)

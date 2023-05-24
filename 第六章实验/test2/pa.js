@@ -1,15 +1,10 @@
 const PORT = process.argv[2];
 const MAP_NAME = process.argv[3];
 const POSITION = MAP_NAME === "all" ? "wx4e111111111" : `${MAP_NAME}111111111111`.slice(0, 14);
-const POSITION1 = "wx4ep11111111";
+
 const fs = require('fs');
 const Web3 = require('web3');
 let web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:" + PORT));
-
-let web31 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:"+"8547"));
-
-// console.log("eth.getAccountByRegion",web31.eth.getAccountByRegion('wx4ep'));
-    
 let deltaLat = 0.596496069;
 let deltaLon = [1.191555127, 1.1800798, 1.157239659, 1.123254668, 1.07845212, 1.023263489, 0.958220271, 0.883948868, 0.801164554, 0.710664587, 0.613320532, 0.510069865, 0.401906947, 0.289873444, 0.175048303, 0.05853735];
 let Base32 = "0123456789bcdefghjkmnpqrstuvwxyz".split("");
@@ -30,13 +25,11 @@ let divnum = 4;
 let mapContractAddress = '0x23b98f92ceac005e570b6768da377b3abd11012e';
 let mapContractAbi = JSON.parse(fs.readFileSync('./mapContractAbi.json', 'utf-8'));
 let mapContract = new web3.eth.Contract(mapContractAbi, mapContractAddress);
-let mapContract1 = new web31.eth.Contract(mapContractAbi, mapContractAddress);
 
 //Traffic contract
 let trafficContractAddress = '0xfa6b8f0b92b323c28557faf69da028e33856f6ca';
 let trafficContractAbi = JSON.parse(fs.readFileSync('./trafficContractAbi.json', 'utf-8'));
 let trafficContract = new web3.eth.Contract(trafficContractAbi, trafficContractAddress);
-let trafficContract1 = new web31.eth.Contract(trafficContractAbi, trafficContractAddress);
 
 let passengersInfo = JSON.parse(fs.readFileSync("./passengers_info_" + MAP_NAME + ".json", "utf-8"));
 
@@ -55,9 +48,9 @@ let error2Messages = [];
 // const FROM = "wx4er200z2r"
 // const TO = "wx4erw9rnsr"
 const GAS_OFFER = 500_0000
+// const GAS_OFFER = 1
 const VALUE = 100_0000_0000_0000
 const accountManagerW11 = "0x196424dd2bf7c978228ebd7a17b38b993d650696"
-let ttt = "0xc0a3917e5679c0ef9033c41cbe294a212abe55df";
 
 //乘客发出调度请求
 async function manageVehicleByRegion5() {
@@ -69,26 +62,6 @@ async function manageVehicleByRegion5() {
         }, (MAP_NAME === "all" ? 750 : 3000) * i);
         i++;
     }
-    // let region = 'wx4e';
-    // await web31.eth.getAccountByRegion(region).then(function (result) {    
-    //     if (result != null) {
-    //         console.log("regionTask: ", region)
-    //         // console.log("regionVehiclesAll: ",regionVehiclesAll);
-    //         let resultVehicles = Object.keys(result);
-    //         console.log("resultVehicles: ",resultVehicles);
-    //         let resultVehiclesTime = Object.values(result);
-    //         console.log("resultVehiclesTime: ",resultVehiclesTime);
-    //         for (let j = 0; j < resultVehicles.length; j++) {
-    //             if (resultVehiclesTime[j] > (startTime - 60000) && resultVehiclesTime[j] < Date.now()) {
-    //                 regionVehicles.push(resultVehicles[j]);
-    //             }
-    //         }
-    //         console.log("getAccountByRegion: ",result);
-    //     }
-    //     else{
-    //         console.log("getAccountByRegion_Wrong!!!!!: ",region);
-    //     }
-    // })
 }
 if (process.argv.length === 4) {
     manageVehicleByRegion5();
@@ -98,14 +71,15 @@ if (process.argv.length === 4) {
 
 function passengerUnit(accountAddr) {
     let passengerMessage = {};
-    console.log("begin");
+    // console.log("begin");
     console.log("accountAddr",accountAddr);
     trafficContract.methods.initPassenger(
         accountAddr,
         web3.utils.asciiToHex(passengersInfo[accountAddr].start)
     ).send(
         {
-            from: accountAddr,
+            // from: accountAddr,
+            from: accountManagerW11,
             gas: GAS_OFFER,
             position: POSITION,
             txtime: 278000
@@ -118,7 +92,8 @@ function passengerUnit(accountAddr) {
             web3.utils.asciiToHex(passengersInfo[accountAddr].start),
             web3.utils.asciiToHex(passengersInfo[accountAddr].end)
         ).send({
-            from: accountAddr,
+            // from: accountAddr,
+            from: accountManagerW11,
             gas: GAS_OFFER,
             position: POSITION,
             txtime: 278010
@@ -139,9 +114,9 @@ function passengerUnit(accountAddr) {
             Promise.all(regionTasks).then(function (_result) {
                 console.warn(`${(new Date()).getTime()}@passenger@${accountAddr}@FoundIdleCarsNearby`)
                 //返回距离乘客最近的空车的位置
-                console.log("neighbourRegion.length,",neighbourRegion.length)
-                console.log(neighbourRegion[0], neighbourRegion[1],neighbourRegion[2],neighbourRegion[3])
-                console.log("regionVehicles,",regionVehicles)
+                // console.log("neighbourRegion.length,",neighbourRegion.length)
+                // console.log(neighbourRegion[0], neighbourRegion[1],neighbourRegion[2],neighbourRegion[3])
+                // console.log("regionVehicles,",regionVehicles)
                 console.log("开始执行getVehicleByRegion")
 
                 getVehicleByRegion(accountAddr, passengersInfo[accountAddr].start, regionVehicles, passengerMessage, 0);
@@ -154,54 +129,63 @@ function passengerUnit(accountAddr) {
 
 function getOff(passengerId, vehicleId) {
     console.log("开始支付订单");
-    // web3.eth.sendTransaction({
-    // 	from: passengerId,
-    // 	to: vehicleId,
-    // 	value: VALUE,
-    //     gas: GAS_OFFER,
-    // 	position:POSITION,
-    // 	txtime:278000
-    // })
-    // .then(function(receipt){
-    trans_tx(passengerId ,ttt);
-    trafficContract1.methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITION1, txtime: 278000 }).then(function (result) {
+    console.log("发送转账,VALUE:",VALUE);
+    web3.eth.sendTransaction({
+    	from: accountManagerW11,
+    	to: passengerId,
+    	value: 21000000000000,
+    	position:POSITION,
+    	txtime:278000
+    })
+    web3.eth.sendTransaction({
+    	from: passengerId,
+    	to: vehicleId,
+    	value: VALUE,
+        // gas: GAS_OFFER,
+    	position:POSITION,
+    	txtime:278000
+    })
+    .then(function(receipt){
+        
+    trafficContract.methods.confirmPay(vehicleId).send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 }).then(function (result) {
+    // trafficContract.methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }).then(function (result) {
         console.log("乘客支付了订单");
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerPaysAndGetsOff`)
     })
-    // }, function (error1) {
-    //     console.log(`NOT done!!!!`);
-    // });
+    }, function (error1) {
+        console.log(`NOT done!!!!`);
+    });
 }
 
 async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, passengerMessage, count) {
     let getVehicleTime1 = Date.now()
     // console.log("regionVehicles: ", regionVehicles);
     console.log("positionGeohash: ", positionGeohash);
-    trafficContract1.methods.getVehicleByRegion(
-        web31.utils.asciiToHex(positionGeohash),
-        regionVehicles
-    )    
-    // trafficContract.methods.getVehicle(
-    //     web3.utils.asciiToHex(positionGeohash)
-    // )
+    // trafficContract.methods.getVehicleByRegion(
+    //     web3.utils.asciiToHex(positionGeohash),
+    //     regionVehicles
+    // )    
+    trafficContract.methods.getVehicle(
+        web3.utils.asciiToHex(positionGeohash)
+    )
     .call(
-        { from: passengerId, gas: GAS_OFFER }
+        // { from: passengerId, gas: GAS_OFFER }
+        { from: accountManagerW11, gas: GAS_OFFER }
     ).then(async function (result1) {
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@FoundTheMostNearbyCar`)
         console.log("调用合约的getVehicleByRegion成功了")
         
-        console.log("result1[0]: ", result1[0])
-        console.log("result1[1]: ", result1[1])
+        // console.log("result1[0]: ", result1[0])
+        // console.log("result1[1]: ", result1[1])
 
         let getVehicleTime2 = Date.now() - getVehicleTime1;
 
-        trafficContract1.methods.setVehicleStatus(
-            result1[1], passengerId, web31.utils.asciiToHex(positionGeohash)
-        )
-        .send(
-            { from: passengerId, gas: GAS_OFFER, position: POSITION1, txtime: 278000 }
-        )
-        .then(function (result2) {
+        trafficContract.methods.setVehicleStatus(
+            result1[1], passengerId, web3.utils.asciiToHex(positionGeohash)
+        ).send(
+            // { from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
+            { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
+        ).then(function (result2) {
             console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@TheMostNearbyCarIsSelected`)
             console.log("调用合约的setVehicleStatus成功了")
             let vehiclePosition = web3.utils.hexToAscii(result1[0]).slice(0, 11);
@@ -219,7 +203,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, 
 
             //passengerEvent
             let isboard = false;
-            trafficContract1.events.routeEvent(function (error, event) {
+            trafficContract.events.routeEvent(function (error, event) {
                 if (error) {
                     console.log("error: ", error);
                 }
@@ -228,8 +212,9 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, 
                     // let color = (isboard == false) ? "#FFFF00" : "#00FF00";
                     if (isboard == false) {
                         isboard = true
-                        trafficContract1.methods.confirmBoard(passengerMessage.vehicleId).send(
-                            { from: passengerId, gas: GAS_OFFER, position: POSITION1, txtime: 278000 }
+                        trafficContract.methods.confirmBoard(passengerMessage.vehicleId).send(
+                            // { from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
+                            { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 }  
                         ).then(function (result) {
                             console.log(`乘客${passengerId}确认上车`)
                             console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerOnBoard`)
@@ -314,24 +299,24 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, 
 }
 
 async function regionTask(region, regionVehicles) {
-    await web31.eth.getAccountByRegion(region).then(function (result) {
+    await web3.eth.getAccountByRegion(region).then(function (result) {
         if (result != null) {
             console.log("regionTask: ", region)
             // console.log("regionVehiclesAll: ",regionVehiclesAll);
             let resultVehicles = Object.keys(result);
-            console.log("resultVehicles: ",resultVehicles);
+            // console.log("resultVehicles: ",resultVehicles);
             let resultVehiclesTime = Object.values(result);
-            console.log("resultVehiclesTime: ",resultVehiclesTime);
+            // console.log("resultVehiclesTime: ",resultVehiclesTime);
             for (let j = 0; j < resultVehicles.length; j++) {
                 if (resultVehiclesTime[j] > (startTime - 60000) && resultVehiclesTime[j] < Date.now()) {
                     regionVehicles.push(resultVehicles[j]);
                 }
             }
-            console.log("getAccountByRegion: ",result);
+            // console.log("getAccountByRegion: ",result);
         }
-        else{
-            console.log("getAccountByRegion_Wrong!!!!!: ",region);
-        }
+        // else{
+        //     console.log("getAccountByRegion_Wrong!!!!!: ",region);
+        // }
     })
 }
 
@@ -494,100 +479,4 @@ function CalculateAdjacent(hash, dir) {
     else {
         return nHash;
     }
-}
-
-function sleep(delay) {
-	var start = new Date().getTime();
-	while (new Date().getTime() < start + delay);
-}
-
-function trans_tx(from_add ,to_add) {
-	//移动账户在目标链发送普通交易,余额不足,未成功
-    // let i = 0
-	// web31.eth.sendTransaction(
-	// 	{ from: to_add, to: minerW12, position: POSITION1, txtime: 278000},
-	// 	function (err, res) {
-	// 		if (err) {
-	// 			console.log(`!!mobileAccounts[${i}]--insufficient funds for this transaction--w12!!`)
-	// 		}else{
-    //             return
-    //         }
-	// 	}
-	// )
-	// sleep(200)
-	//2. 第一次移动:移动账户在目标链w12发起资产转移请求交易Tx_request
-    sleep(2000)
-    let hashRequests = " ";
-	web31.eth.sendTransaction(
-		{ from: to_add, to: accountManagerW11, position: POSITION1, txtype: 1, txtime: Date.now()},
-		function (err, res) {
-			if (err) {
-				console.error("Error:", err);
-			} else {
-				sleep(2000)
-                console.log("res:",res);
-				hashRequests = web31.utils.asciiToHex(res);
-				console.log(`mobileAccounts[0]_hash_request: ${hashRequests}`);
-			}
-		}
-	)
-
-	// let idx = mobileAccountFromHexToAddress.indexOf(acc)
-
-	let hash_req = hashRequests
-    // const macc_outbal = web3.eth.getBalance(from_add)
-    const macc_outbal = VALUE
-
-	console.log("get_outchain_info--outchain_balance:", macc_outbal)
-
-	web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now(), exdata: hash_req }
-    , function (err, res) {
-		if (err) {
-			console.log("Error:", err);
-		} else {
-			sleep(2000);
-			console.log("Result:", res);
-			hash_out = web3.utils.asciiToHex(res);
-			send_inchain_tx(web31, to_add, macc_outbal, hash_out, POSITION1, web3, POSITION);
-		}
-	});
-    
-}
-
-//4. ama在目标链发送资产转入交易Tx_in
-function send_inchain_tx(inweb3, acc, inbal, txouthash, inpos, outweb3, outpos) {
-	inweb3.eth.sendTransaction({ from: accountManagerW11, to: acc, value: inbal, position: inpos, txtype: 3, txtime: Date.now(), exdata: txouthash }
-    , function (err, res) {
-		if (err) {
-			console.log("Error:", err);
-		} else {
-			sleep(2000)
-			console.log("send_inchain--Result:", res);
-			hash_in = inweb3.utils.asciiToHex(res);
-			console.log("send_inchain--hash_in:", hash_in);
-			sleep(2000)
-			var macc1_inbal = inweb3.eth.getBalance(acc)
-			console.log("send_inchain--balance:", macc1_inbal)
-			send_result_tx(outweb3, acc, true, hash_in, outpos);
-		}
-	});
-
-}
-
-
-//5. ama在来源链发送Tx_result交易
-function send_result_tx(outweb3, acc, result, txinhash, outpos) {
-	if (result) {
-		outweb3.eth.sendTransaction({ from: accountManagerW11, to: acc, position: outpos, txtype: 4, txtime: Date.now(), exdata: txinhash }
-            , function (err, res) {
-			if (err) {
-				console.log("Error:", err);
-			} else {
-				sleep(2000)
-				console.log("send_result--Tx_result:", res);
-				// endtime = new Date().getTime();
-				// console.log("during--", endtime - starttime)
-			}
-		});
-	}
 }
