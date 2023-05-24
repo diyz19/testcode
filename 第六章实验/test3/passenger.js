@@ -48,7 +48,9 @@ let error2Messages = [];
 // const FROM = "wx4er200z2r"
 // const TO = "wx4erw9rnsr"
 const GAS_OFFER = 500_0000
+// const GAS_OFFER = 1
 const VALUE = 100_0000_0000_0000
+const accountManagerW11 = "0x196424dd2bf7c978228ebd7a17b38b993d650696"
 
 //乘客发出调度请求
 async function manageVehicleByRegion5() {
@@ -69,14 +71,15 @@ if (process.argv.length === 4) {
 
 function passengerUnit(accountAddr) {
     let passengerMessage = {};
-    console.log("begin");
+    // console.log("begin");
     console.log("accountAddr",accountAddr);
     trafficContract.methods.initPassenger(
         accountAddr,
         web3.utils.asciiToHex(passengersInfo[accountAddr].start)
     ).send(
         {
-            from: accountAddr,
+            // from: accountAddr,
+            from: accountManagerW11,
             gas: GAS_OFFER,
             position: POSITION,
             txtime: 278000
@@ -89,7 +92,8 @@ function passengerUnit(accountAddr) {
             web3.utils.asciiToHex(passengersInfo[accountAddr].start),
             web3.utils.asciiToHex(passengersInfo[accountAddr].end)
         ).send({
-            from: accountAddr,
+            // from: accountAddr,
+            from: accountManagerW11,
             gas: GAS_OFFER,
             position: POSITION,
             txtime: 278010
@@ -110,9 +114,9 @@ function passengerUnit(accountAddr) {
             Promise.all(regionTasks).then(function (_result) {
                 console.warn(`${(new Date()).getTime()}@passenger@${accountAddr}@FoundIdleCarsNearby`)
                 //返回距离乘客最近的空车的位置
-                console.log("neighbourRegion.length,",neighbourRegion.length)
-                console.log(neighbourRegion[0], neighbourRegion[1],neighbourRegion[2],neighbourRegion[3])
-                console.log("regionVehicles,",regionVehicles)
+                // console.log("neighbourRegion.length,",neighbourRegion.length)
+                // console.log(neighbourRegion[0], neighbourRegion[1],neighbourRegion[2],neighbourRegion[3])
+                // console.log("regionVehicles,",regionVehicles)
                 console.log("开始执行getVehicleByRegion")
 
                 getVehicleByRegion(accountAddr, passengersInfo[accountAddr].start, regionVehicles, passengerMessage, 0);
@@ -125,22 +129,25 @@ function passengerUnit(accountAddr) {
 
 function getOff(passengerId, vehicleId) {
     console.log("开始支付订单");
-    web3.eth.sendTransaction({
-    	from: passengerId,
-    	to: vehicleId,
-    	value: VALUE,
-        gas: GAS_OFFER,
-    	position:POSITION,
-    	txtime:278000
-    })
-    .then(function(receipt){
-    trafficContract.methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }).then(function (result) {
+    // console.log("发送转账,VALUE:",VALUE);
+    // web3.eth.sendTransaction({
+    // 	from: passengerId,
+    // 	to: vehicleId,
+    // 	value: VALUE,
+    //     gas: GAS_OFFER,
+    // 	position:POSITION,
+    // 	txtime:278000
+    // })
+    // .then(function(receipt){
+        
+    trafficContract.methods.confirmPay(vehicleId).send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 }).then(function (result) {
+    // trafficContract.methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }).then(function (result) {
         console.log("乘客支付了订单");
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerPaysAndGetsOff`)
     })
-    }, function (error1) {
-        console.log(`NOT done!!!!`);
-    });
+    // }, function (error1) {
+    //     console.log(`NOT done!!!!`);
+    // });
 }
 
 async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, passengerMessage, count) {
@@ -155,20 +162,22 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, 
         web3.utils.asciiToHex(positionGeohash)
     )
     .call(
-        { from: passengerId, gas: GAS_OFFER }
+        // { from: passengerId, gas: GAS_OFFER }
+        { from: accountManagerW11, gas: GAS_OFFER }
     ).then(async function (result1) {
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@FoundTheMostNearbyCar`)
         console.log("调用合约的getVehicleByRegion成功了")
         
-        console.log("result1[0]: ", result1[0])
-        console.log("result1[1]: ", result1[1])
+        // console.log("result1[0]: ", result1[0])
+        // console.log("result1[1]: ", result1[1])
 
         let getVehicleTime2 = Date.now() - getVehicleTime1;
 
         trafficContract.methods.setVehicleStatus(
             result1[1], passengerId, web3.utils.asciiToHex(positionGeohash)
         ).send(
-            { from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
+            // { from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
+            { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
         ).then(function (result2) {
             console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@TheMostNearbyCarIsSelected`)
             console.log("调用合约的setVehicleStatus成功了")
@@ -197,7 +206,8 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehicles, 
                     if (isboard == false) {
                         isboard = true
                         trafficContract.methods.confirmBoard(passengerMessage.vehicleId).send(
-                            { from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
+                            // { from: passengerId, gas: GAS_OFFER, position: POSITION, txtime: 278000 }
+                            { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 }  
                         ).then(function (result) {
                             console.log(`乘客${passengerId}确认上车`)
                             console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerOnBoard`)
@@ -287,19 +297,19 @@ async function regionTask(region, regionVehicles) {
             console.log("regionTask: ", region)
             // console.log("regionVehiclesAll: ",regionVehiclesAll);
             let resultVehicles = Object.keys(result);
-            console.log("resultVehicles: ",resultVehicles);
+            // console.log("resultVehicles: ",resultVehicles);
             let resultVehiclesTime = Object.values(result);
-            console.log("resultVehiclesTime: ",resultVehiclesTime);
+            // console.log("resultVehiclesTime: ",resultVehiclesTime);
             for (let j = 0; j < resultVehicles.length; j++) {
                 if (resultVehiclesTime[j] > (startTime - 60000) && resultVehiclesTime[j] < Date.now()) {
                     regionVehicles.push(resultVehicles[j]);
                 }
             }
-            console.log("getAccountByRegion: ",result);
+            // console.log("getAccountByRegion: ",result);
         }
-        else{
-            console.log("getAccountByRegion_Wrong!!!!!: ",region);
-        }
+        // else{
+        //     console.log("getAccountByRegion_Wrong!!!!!: ",region);
+        // }
     })
 }
 
