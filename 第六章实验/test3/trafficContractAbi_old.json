@@ -21,57 +21,7 @@
                 "type": "bytes32"
             }
         ],
-        "name": "Beginevent",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "vehicleId",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "passengerId",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "passengerGeohash",
-                "type": "bytes32"
-            }
-        ],
         "name": "Myevent",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "vehicleId",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "passengerId",
-                "type": "bytes32"
-            },
-            {
-                "indexed": false,
-                "internalType": "bytes32",
-                "name": "passengerGeohash",
-                "type": "bytes32"
-            }
-        ],
-        "name": "Send_Confirm_event",
         "type": "event"
     },
     {
@@ -125,56 +75,6 @@
         ],
         "name": "routeEvent",
         "type": "event"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "vehicleId",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "passengerId",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "passengerGeohash",
-                "type": "bytes32"
-            }
-        ],
-        "name": "Send_Confirm",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "bytes32",
-                "name": "vehicleId",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "passengerId",
-                "type": "bytes32"
-            },
-            {
-                "internalType": "bytes32",
-                "name": "passengerGeohash",
-                "type": "bytes32"
-            }
-        ],
-        "name": "Start_Begin",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
     },
     {
         "constant": false,

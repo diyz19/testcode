@@ -3,6 +3,7 @@ const MAP_NAME = process.argv[3];
 const POSITION = MAP_NAME === "all" ? "wx4e111111111" : `${MAP_NAME}111111111111`.slice(0, 14);
 const POSITION1 = "wx4ep11111111";
 const POSITION2 = "wx4eq11111111";
+const { EEXIST } = require('constants');
 const fs = require('fs');
 const Web3 = require('web3');
 let web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:" +"8546"));
@@ -45,6 +46,14 @@ let trafficContract1 = new web31.eth.Contract(trafficContractAbi, trafficContrac
 let trafficContract2 = new web32.eth.Contract(trafficContractAbi, trafficContractAddress);
 // let trafficContract = trafficContract0;
 
+
+let transfContractAddress = '0x5d9ec06ef6f5384c50886174a88db14624017340';
+let transfContractAbi = JSON.parse(fs.readFileSync('./transfContractAbi.json', 'utf-8'));
+let transfContract = new web3.eth.Contract(transfContractAbi, transfContractAddress);
+let transfContract1 = new web31.eth.Contract(transfContractAbi, transfContractAddress);
+let transfContract2 = new web32.eth.Contract(trafficContractAbi, trafficContractAddress);
+
+
 let passengersInfo = JSON.parse(fs.readFileSync("./passengers_info_" + MAP_NAME + ".json", "utf-8"));
 
 
@@ -63,6 +72,7 @@ let error2Messages = [];
 let weblist = [web3 , web31, web32];
 let mapContractlist = [mapContract, mapContract1, mapContract2];
 let trafficContractlist = [trafficContract, trafficContract1, trafficContract2];
+let transfContractlist = [transfContract, transfContract1, transfContract2];
 
 // const FROM = "wx4er200z2r"
 // const TO = "wx4erw9rnsr"
@@ -94,8 +104,8 @@ if (process.argv.length === 4) {
 
 function passengerUnit(accountAddr) {
     let passengerMessage = {};
-    console.log("begin");
-    console.log("accountAddr",accountAddr);
+    // console.log("begin");
+    console.log("accountAddr:",accountAddr);
     trafficContract.methods.initPassenger(
         accountAddr,
         web3.utils.asciiToHex(passengersInfo[accountAddr].start)
@@ -133,9 +143,8 @@ function passengerUnit(accountAddr) {
             let regionTasks = [];
             for (let i = 0; i < neighbourRegion.length; i++) {
                 regionTasks.push(regionTask(neighbourRegion[i], regionVehicles, 0));
-                regionTasks.push(regionTask(neighbourRegion[i], regionVehicles1, 1));
-                regionTasks.push(regionTask(neighbourRegion[i], regionVehicles2, 2));
-
+                // regionTasks.push(regionTask(neighbourRegion[i], regionVehicles1, 1));
+                // regionTasks.push(regionTask(neighbourRegion[i], regionVehicles2, 2));
                 // console.log("neighbourRegion[%d]: %d,",i,neighbourRegion[i]);
                 // console.log("regionVehicles",regionVehicles);
             }
@@ -143,20 +152,18 @@ function passengerUnit(accountAddr) {
                 console.warn(`${(new Date()).getTime()}@passenger@${accountAddr}@FoundIdleCarsNearby`)
                 //返回距离乘客最近的空车的位置
                 // console.log("neighbourRegion.length,",neighbourRegion.length)
-                // console.log(neighbourRegion[0], neighbourRegion[1],neighbourRegion[2],neighbourRegion[3])
                 // console.log("regionVehicles,",regionVehicles1)
-                console.log("开始执行getVehicleByRegion")
-
+                console.log("开始执行getVehicle")
                 getVehicleByRegion(accountAddr, passengersInfo[accountAddr].start, regionVehicleslist, passengerMessage, 0, VeRe);
             })
         })
     }, function (error1) {
-        console.log(`NOT done!!!!`);
+        console.log(`INIT FAILED!!!!`);
     })
 }
 
 async function getOff(passengerId, vehicleId, VeRe) {
-    console.log("开始支付订单");
+    // console.log("开始支付订单");
     // web3.eth.sendTransaction({
     // 	from: passengerId,
     // 	to: vehicleId,
@@ -166,44 +173,50 @@ async function getOff(passengerId, vehicleId, VeRe) {
     // 	txtime:278000
     // })
     // .then(function(receipt){
-    trans_tx(passengerId ,vehicleId, weblist[VeRe]).then(function (result) {
-        trafficContractlist[VeRe].methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }).then(function (result) {
-            console.log("乘客支付了订单");
-            console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerPaysAndGetsOff`)
-        })
+    // trans_tx(passengerId ,vehicleId, weblist[VeRe]).then(function (result) {
+    trafficContractlist[VeRe].methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }).then(function (result) {
+        console.log("乘客确认交易结束");
+        console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerPaysAndGetsOff`)
+    })
     // })
-    }, function (error1) {
-        console.log(`NOT done!!!!`);
-    });
+    // }, function (error1) {
+    //     console.log(`NOT done!!!!`);
+    // });
 }
 
 async function getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe) {
     let getVehicleTime1 = Date.now()
     // console.log("regionVehicles: ", regionVehicles);
     console.log("positionGeohash: ", positionGeohash);
-    trafficContractlist[VeRe].methods.getVehicleByRegion(
-        weblist[VeRe].utils.asciiToHex(positionGeohash),
-        regionVehicleslist[VeRe]
-    )    
-    // trafficContractlist[VeRe].methods.getVehicle(
-    //     weblist[VeRe].utils.asciiToHex(positionGeohash)
+    // trafficContractlist[VeRe].methods.getVehicleByRegion(
+    //     weblist[VeRe].utils.asciiToHex(positionGeohash),
+    //     regionVehicleslist[VeRe]
     // )    
+    trafficContractlist[VeRe].methods.getVehicle(
+        weblist[VeRe].utils.asciiToHex(positionGeohash)
+    )    
     .call(
         { from: passengerId, gas: GAS_OFFER }
     ).then(async function (result1) {
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@FoundTheMostNearbyCar`)
-        console.log("result1[0]: ", result1[0])
-        console.log("result1[1]: ", result1[1])
+        // console.log("result1[0]: ", result1[0])
+        // console.log("result1[1]: ", result1[1])
 
         let getVehicleTime2 = Date.now() - getVehicleTime1;
         if(result1[1] == nul){
             if(VeRe + 1 < 3){
                 console.log("VERE",VeRe);
+                console.log("调度车辆中1");
                 getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe + 1);
             }
+            // else{
+            //     getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe);
+            // }
         }
-        console.log("调用合约的getVehicleByRegion成功了")
-        trafficContractlist[VeRe].methods.setVehicleStatus(
+        else
+        {
+            console.log("调用合约的getVehicle成功了")
+            trafficContractlist[VeRe].methods.setVehicleStatus(
             result1[1], passengerId, weblist[VeRe].utils.asciiToHex(positionGeohash)
         )
         .send(
@@ -225,6 +238,33 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
 
             // console.log("代码中的接下来的这个routeEvent是打算监听什么吗？")
             console.log("VERE",VeRe);
+
+            //passengerEvent
+            trafficContractlist[VeRe].events.Send_Confirm_event(function (error, event) {
+                console.log("Send_Confirm_event",VeRe);
+                if (error) {
+                    console.log("error: ", error);
+                }
+                if (event.returnValues.passengerId.slice(0, 42) == passengerId.toLowerCase()) {
+                    // console.log(event);
+                    console.log("开始支付订单");
+                    let ve1 = event.returnValues.vehicleId.slice(0, 42)
+                    console.log("vel", ve1);
+                    trans_tx(passengerId ,ve1, VeRe).then(function (result) {
+                        trafficContractlist[VeRe].methods.Start_Begin(
+                            ve1, passengerId, event.returnValues.passengerGeohash 
+                            ).send(
+                            { from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
+                            ).then(function (result) {
+                            console.log("乘客支付了订单");
+                            console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerPaysAndGetsOff`)
+                        })
+                    }, function (error1) {
+                        console.log(`PAYMENT FAILED!!!!`);
+                    });
+                }
+            })
+
             //passengerEvent
             let isboard = false;
             trafficContractlist[VeRe].events.routeEvent(function (error, event) {
@@ -270,7 +310,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
             //count < 100
             if (count < 100) {
                 // $("#vehicleEvent").val("调度车辆中");
-                // console.log("调度车辆中");
+                console.log("调度车辆中2");
                 if(count > 1 && (VeRe + 1) < 3){
                     setTimeout(function () {
                         getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe + 1)
@@ -299,6 +339,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
                 }
             }
         })
+        }
     }, function (error1) {
         console.log(`乘客${passengerId}第${count}次请求没有调度到车`);
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@NoCarAvailable`)
@@ -307,7 +348,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
         count++;
         if (count < 10) {
             // $("#vehicleEvent").val("调度车辆中");
-            // console.log("调度车辆中");
+            console.log("调度车辆中3");
             if(VeRe < 3)
                 getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe + 1);
         } else {
@@ -334,25 +375,22 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
 async function regionTask(region, regionVehicles, VeRe) {
     await weblist[VeRe].eth.getAccountByRegion(region).then(function (result) {
         if (result != null) {
-            console.log("regionTask: ", region)
-
+            // console.log("regionTask: ", region)
             let resultVehicles = Object.keys(result);
-                console.log("resultVehicles: ",resultVehicles);
-
+            // console.log("resultVehicles: ",resultVehicles);
             let resultVehiclesTime = Object.values(result);
-                console.log("resultVehiclesTime: ",resultVehiclesTime);
-
+            // console.log("resultVehiclesTime: ",resultVehiclesTime);
             for (let j = 0; j < resultVehicles.length; j++) {
                 // if (resultVehiclesTime[j] < Date.now() && resultVehiclesTime[j] != 278000) {
                 if (resultVehiclesTime[j] > (startTime - 60000) && resultVehiclesTime[j] < Date.now()) {
                     regionVehicles.push(resultVehicles[j]);
                 }
             }
-            console.log("getAccountByRegion: ",result);
+            // console.log("getAccountByRegion: ",result);
         }
-        else{
-            console.log("getAccountByRegion_Wrong!!!!!: ",region);
-        }
+        // else{
+        //     console.log("getAccountByRegion_Wrong!!!!!: ",region);
+        // }
     })
     
 }
@@ -523,13 +561,165 @@ function sleep(delay) {
 	while (new Date().getTime() < start + delay);
 }
 
-async function trans_tx(from_add ,to_add, web_to) {
+async function trans_tx(from_add ,to_add, VeRe) {
+	//2. 第一次移动:移动账户在目标链w12发起资产转移请求交易Tx_request
+    // console.log("in-------transf");
+
+    // console.log("IN_transf1");
+    weblist[VeRe].eth.sendTransaction(
+        { 
+            from: to_add, to: accountManagerW11, position: POSITIONLIST[VeRe], txtype: 1, txtime: Date.now()
+        },
+        function (err, res) {
+            if (err) {
+                console.error("Error:", err);
+            } else {
+                // sleep(2000)
+                console.log("res:",res);
+                hashRequests = weblist[VeRe].utils.asciiToHex(res);
+                console.log(`hash_request: ${hashRequests}`);
+                transfContractlist[VeRe].methods.IN_transf1(to_add, from_add, res)
+                .send(
+                    { from: accountManagerW11, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
+                    )
+                .then(function (result) {
+                    console.log("IN_transf1");
+                },function(error){
+                    console.log("error_IN_transf1",error);
+                })
+            }
+        }
+    )
+   
+    // console.log("in-------transf1");
+    transfContractlist[VeRe].events.IN_Event1(function (error, event) {
+        if (error !== null) {
+            console.log("IN_Event1: ", error);
+        }
+        if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+        && event.returnValues.vehicleId.slice(0, 42) == to_add.toLowerCase()
+        ) {
+            let passengerId = event.returnValues.passengerId;
+            let hash_req = weblist[VeRe].utils.asciiToHex(event.returnValues.last_hash);
+
+            // let passengerGeohash = web3.utils.hexToAscii(event.returnValues.passengerGeohash).slice(0, 11);
+            // vehicleCurrentTime = Date.now();
+
+            // let hash_req = hashRequests
+            const macc_outbal = VALUE
+            console.log("get_outchain_info--outchain_balance:", macc_outbal)
+        
+            web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now(), exdata: hash_req }
+            // web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now()}
+            , function (err, res) {
+                if (err) {
+                    console.log("Error:", err);
+                } else {
+                    // sleep(2000);
+                    console.log("Result:", res);
+                    hash_out = web3.utils.asciiToHex(res);
+                    // send_inchain_tx(web31, to_add, macc_outbal, hash_out, POSITION1, web3, POSITION);
+                    transfContract.methods.OUT_transf2(to_add, from_add, res)
+                    .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
+                    .then(function (result) {
+                        console.log("IN_Event1");
+                    })
+                }
+            });
+        }
+    })
+    // console.log("in-------transf2");
+    
+    transfContract.events.OUT_Event2(function (error, event) {
+        if (error !== null) {
+            console.log("OUT_Event2: ", error);
+        }
+        if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+        && event.returnValues.vehicleId.slice(0, 42) == to_add.toLowerCase()
+        ) {
+            // let passengerId = event.returnValues.passengerId;
+            let txouthash = weblist[VeRe].utils.asciiToHex(event.returnValues.last_hash);
+
+            weblist[VeRe].eth.sendTransaction({ from: accountManagerW11, to: to_add, value: VALUE, position: POSITIONLIST[VeRe], txtype: 3, txtime: Date.now(), exdata: txouthash }
+            , function (err, res) {
+                if (err) {
+                    console.log("Error:", err);
+                } else {
+                    sleep(2000)
+                    console.log("send_inchain--Result:", res);
+                    hash_in = weblist[VeRe].utils.asciiToHex(res);
+                    console.log("send_inchain--hash_in:", hash_in);
+                    // sleep(2000)
+                    console.log("send_inchain--balance:", VALUE)
+                    // send_result_tx(outweb3, ve_id, true, hash_in, outpos);
+                    transfContractlist[VeRe].methods.IN_transf3(to_add, from_add, res)
+                    .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 })
+                    .then(function (result) {
+                        // web31.eth.sendTransaction({ from: accountManagerW11, to: ve_id, value: VALUE, position: inpos, txtype: 3, txtime: Date.now(), exdata: txouthash }
+                        console.log("OUT_Event2");
+                    })
+                }
+            });
+        }
+    })
+    // console.log("in-------transf3");
+    transfContractlist[VeRe].events.IN_Event3(function (error, event) {
+        if (error !== null) {
+            console.log("IN_Event3: ", error);
+        }
+        if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+        && event.returnValues.vehicleId.slice(0, 42) == to_add.toLowerCase()
+        ) {
+            // let passengerId = event.returnValues.passengerId;
+            let txinhash = weblist[VeRe].utils.asciiToHex(event.returnValues.last_hash);
+            web3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: POSITION, txtype: 4, txtime: Date.now(), exdata: txinhash}
+            , function (err, res) {
+                if (err) {
+                    console.log("Error:", err);
+                } else {
+                    sleep(2000)
+                    console.log("send_result--Tx_result:", res);
+                    // endtime = new Date().getTime();
+                    // console.log("during--", endtime - starttime)
+                    transfContract.methods.OUT_transf4(to_add, from_add, res)
+                    .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
+                    .then(function (result) {
+                        // outweb3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: outpos, txtype: 4, txtime: Date.now(), exdata: txinhash }
+                        console.log("IN_Event3");
+                    })
+                }
+            });
+
+        }
+    })
+    // console.log("in-------transf4");
+
+    transfContract.events.OUT_Event4(function (error, event) {
+        if (error) {
+                console.log("Error:", error);
+        } else {
+            if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+            && event.returnValues.vehicleId.slice(0, 42) == to_add.toLowerCase()
+            ){
+                // sleep(2000)
+                console.log("send_result--Tx_result:", 'end');
+                // endtime = new Date().getTime();
+                // console.log("during--", endtime - starttime)
+                // return;
+            }
+        }
+    });
+}
+
+
+async function trans_tx1(from_add ,to_add, VeRe) {
 	//2. 第一次移动:移动账户在目标链w12发起资产转移请求交易Tx_request
     sleep(2000)
+    let web_to = weblist[VeRe]
     let hashRequests = " ";
 	web_to.eth.sendTransaction(
         // { from: to_add, to: accountManagerW12, position: POSITION1, txtype: 1, txtime: Date.now()},
-		{ from: to_add, to: accountManagerW11, position: POSITION1, txtype: 1, txtime: Date.now()},
+		{ from: to_add, to: accountManagerW11, position: POSITIONLIST[VeRe], txtype: 1, txtime: Date.now()},
 		function (err, res) {
 			if (err) {
 				console.error("Error:", err);
@@ -557,7 +747,7 @@ async function trans_tx(from_add ,to_add, web_to) {
 			sleep(2000);
 			console.log("Result:", res);
 			hash_out = web3.utils.asciiToHex(res);
-			send_inchain_tx(web_to, to_add, macc_outbal, hash_out, POSITION1, web3, POSITION);
+			send_inchain_tx(web_to, to_add, macc_outbal, hash_out, POSITIONLIST[VeRe], web3, POSITION);
             return;
 		}
 	});
@@ -577,8 +767,8 @@ async function send_inchain_tx(inweb3, acc, inbal, txouthash, inpos, outweb3, ou
 			hash_in = inweb3.utils.asciiToHex(res);
 			console.log("send_inchain--hash_in:", hash_in);
 			sleep(2000)
-			var macc1_inbal = inweb3.eth.getBalance(acc)
-			console.log("send_inchain--balance:", macc1_inbal)
+			// var macc1_inbal = inweb3.eth.getBalance(acc)
+			console.log("send_inchain--balance:", VALUE)
 			send_result_tx(outweb3, acc, true, hash_in, outpos);
             return;
 		}

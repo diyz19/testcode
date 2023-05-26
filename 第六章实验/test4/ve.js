@@ -44,9 +44,22 @@ const accountManagerW11 = "0x196424dd2bf7c978228ebd7a17b38b993d650696"
 async function initVehicle() {
     const task = [];
     for (let accountAddr in vehiclesInfo) {
-        console.log("accountAddr" + accountAddr);
+        console.log("accountAddr:" + accountAddr);
         console.warn(`${(new Date()).getTime()}@vehicle@${accountAddr}@StartProcessing`);
+        // trafficContract.methods.setVehicleStatusEmpty(accountAddr).send(
+        //     // { from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() },
+        //     { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: Date.now() },
+        //     function (err, _trans_hash) {
+        //         if (!err) {
+        //             console.warn(`${(new Date()).getTime()}@vehicle@${accountAddr}@CarReleased`)
+        //             console.log(accountAddr + "重置")
+        //         } else {
+        //             console.info(err)
+        //         }
+        //     }
+        // ).then(function (result2){
         initUnit(accountAddr, vehiclesInfo[accountAddr].initPos);
+        // })
     }
     // for (let i = 0; i < vehicleIdList.length; i++) {
     //     // task.push(initUnit(vehicleIdList[i], vehiclePositionList[i]));
@@ -78,11 +91,43 @@ async function initUnit(vehicleId, vehiclePosition) {
             console.log("Myevent_error: ", error);
         }
         //whether to pick up the passenger
-        console.log("get_message");
-        console.log("event.returnValues.vehicleId",event.returnValues.vehicleId);
+        console.log("Myevent");
+        console.log("Myevent_vehicleId:",event.returnValues.vehicleId);
         if (event.returnValues.vehicleId.slice(0, 42) == vehicleId.toLowerCase()) {
             // console.log(event);
 
+            let passengerId = event.returnValues.passengerId;
+            let passengerGeohash = web3.utils.hexToAscii(event.returnValues.passengerGeohash).slice(0, 11);
+            // console.log(vehicleId, "接到了乘客", passengerId, "的订单, 乘客位置: ", passengerGeohash);
+            // console.warn(`${(new Date()).getTime()}@vehicle@${vehicleId}@PickUp@${passengerId}`)
+            // vehicleCurrentTime = Date.now();
+
+            trafficContract.methods.Send_Confirm(
+                // vehicleId, vehiclePosition, passengerId, passengerGeohash
+                vehicleId, passengerId, event.returnValues.passengerGeohash
+                ).send(
+                // { from: vehicleId, gas: GAS_OFFER, position: POSITION, txtime: Date.now() },
+                { from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: Date.now() },
+                function (err, _trans_hash) {
+                    if (!err) {
+                        console.log("Send_Confirm:" + vehicleId)
+                    } else {
+                        console.info(err)
+                    }
+                }
+            )
+        }
+    })
+    trafficContract.events.Beginevent(function (error, event) {
+        if (error !== null) {
+            console.log("Myevent_error: ", error);
+        }
+        //whether to pick up the passenger
+        console.log("Beginevent");
+        console.log("Beginevent_vehicleId:",event.returnValues.vehicleId);
+        if (event.returnValues.vehicleId.slice(0, 42) == vehicleId.toLowerCase()) {
+            // console.log(event);
+            console.log("收到转账,VALUE:",VALUE);
             let passengerId = event.returnValues.passengerId;
             let passengerGeohash = web3.utils.hexToAscii(event.returnValues.passengerGeohash).slice(0, 11);
             console.log(vehicleId, "接到了乘客", passengerId, "的订单, 乘客位置: ", passengerGeohash);
@@ -122,7 +167,7 @@ async function initUnit(vehicleId, vehiclePosition) {
             vehiclePosition = vehicleMessage.endGeohash;
             countNum++;
             allVehicleMessage.push(vehicleMessage);
-            console.log("收到转账,VALUE:",VALUE);
+
             web3.eth.sendTransaction({
             	from: accountManagerW11,
                 // from: vehicleId,
@@ -174,14 +219,14 @@ async function initUnit(vehicleId, vehiclePosition) {
         // if (Date.now() >= startTime) {
         // 	console.log(`共加入了${onlineVehicleNum}辆车`);
         // }
-        web3.eth.sendTransaction({
-            from: accountManagerW11,
-            to: vehicleId.toString(),
-            value: 107_1740_0000_0000,
-            position:POSITION,
-            txtime: Date.now()
-        });
-        console.log("车加入",vehicleId);
+        // web3.eth.sendTransaction({
+        //     from: accountManagerW11,
+        //     to: vehicleId.toString(),
+        //     value: 107_1740_0000_0000,
+        //     position:POSITION,
+        //     txtime: Date.now()
+        // });
+        console.log("车辆账户加入:",vehicleId);
         console.log(`${vehiclePosition}第${onlineVehicleNum}辆车加入`);
     });
 }

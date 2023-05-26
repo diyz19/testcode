@@ -163,96 +163,124 @@ async function trans_tx(from_add ,to_add) {
 	// )
 	// sleep(200)
 	//2. 第一次移动:移动账户在目标链w12发起资产转移请求交易Tx_request
-    sleep(2000)
-
-    transfContract1.methods.IN_transf1()
+    // sleep(2000)
+    transfContract1.methods.IN_transf1(to_add, from_add)
     .send(
         { from: accountManagerW11, gas: GAS_OFFER, position: POSITION1, txtime: 278000 }
         )
     .then(function (result) {
-        console.log("乘客支付了订单");
-
+        console.log("IN_transf1");
         web31.eth.sendTransaction(
-            { from: to_add, to: accountManagerW11, position: POSITION1, txtype: 1, txtime: Date.now()},
+            { 
+                from: to_add, to: accountManagerW11, position: POSITION1, txtype: 1, txtime: Date.now()
+            },
             function (err, res) {
                 if (err) {
                     console.error("Error:", err);
                 } else {
-                    sleep(2000)
+                    // sleep(2000)
                     console.log("res:",res);
                     hashRequests = web31.utils.asciiToHex(res);
-                    console.log(`mobileAccounts[0]_hash_request: ${hashRequests}`);
+                    console.log(`hash_request: ${hashRequests}`);
                 }
             }
         )
     })
+
+
     transfContract1.events.IN_Event1(function (error, event) {
         if (error !== null) {
-            console.log("search_Event: ", error);
+            console.log("IN_Event1: ", error);
         }
-        transfContract.methods.OUT_transf2()
-        .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
-        .then(function (result) {
-
-            // let hash_req = hashRequests
-            // const macc_outbal = web3.eth.getBalance(from_add)
-            const macc_outbal = VALUE
-            console.log("get_outchain_info--outchain_balance:", macc_outbal)
-        
-            // web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now(), exdata: hash_req }
-            web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now()}
-            , function (err, res) {
-                if (err) {
-                    console.log("Error:", err);
-                } else {
-                    sleep(2000);
-                    console.log("Result:", res);
-                    hash_out = web3.utils.asciiToHex(res);
-                    // send_inchain_tx(web31, to_add, macc_outbal, hash_out, POSITION1, web3, POSITION);
-                }
-            });
-        })
+        if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+        && event.returnValues.vehicleId.slice(0, 42) == to_add.toLowerCase()
+        ) {
+            let passengerId = event.returnValues.passengerId;
+            // let passengerGeohash = web3.utils.hexToAscii(event.returnValues.passengerGeohash).slice(0, 11);
+            // vehicleCurrentTime = Date.now();
+    
+            transfContract.methods.OUT_transf2(to_add, from_add)
+            .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
+            .then(function (result) {
+    
+                // let hash_req = hashRequests
+                const macc_outbal = VALUE
+                console.log("get_outchain_info--outchain_balance:", macc_outbal)
+            
+                // web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now(), exdata: hash_req }
+                web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now()}
+                , function (err, res) {
+                    if (err) {
+                        console.log("Error:", err);
+                    } else {
+                        sleep(2000);
+                        console.log("Result:", res);
+                        hash_out = web3.utils.asciiToHex(res);
+                        // send_inchain_tx(web31, to_add, macc_outbal, hash_out, POSITION1, web3, POSITION);
+                    }
+                });
+            })
+        }
     })
+
+    
     transfContract.events.OUT_Event2(function (error, event) {
-        transfContract1.methods.IN_transf3()
-        .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION1, txtime: 278000 })
-        .then(function (result) {
-            // web31.eth.sendTransaction({ from: accountManagerW11, to: ve_id, value: VALUE, position: inpos, txtype: 3, txtime: Date.now(), exdata: txouthash }
-            web31.eth.sendTransaction({ from: accountManagerW11, to: to_add, value: VALUE, position: POSITION1, txtype: 3, txtime: Date.now() }
-            , function (err, res) {
-                if (err) {
-                    console.log("Error:", err);
-                } else {
-                    sleep(2000)
-                    console.log("send_inchain--Result:", res);
-                    hash_in = web31.utils.asciiToHex(res);
-                    console.log("send_inchain--hash_in:", hash_in);
-                    sleep(2000)
-                    var macc1_inbal = web31.eth.getBalance(ve_id)
-                    console.log("send_inchain--balance:", macc1_inbal)
-                    // send_result_tx(outweb3, ve_id, true, hash_in, outpos);
-                }
-            });
-        })
+        if (error !== null) {
+            console.log("OUT_Event2: ", error);
+        }
+        if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+        && event.returnValues.vehicleId.slice(0, 42) == to_add.toLowerCase()
+        ) {
+            // let passengerId = event.returnValues.passengerId;
+    
+            transfContract1.methods.IN_transf3(to_add, from_add)
+            .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION1, txtime: 278000 })
+            .then(function (result) {
+                // web31.eth.sendTransaction({ from: accountManagerW11, to: ve_id, value: VALUE, position: inpos, txtype: 3, txtime: Date.now(), exdata: txouthash }
+                web31.eth.sendTransaction({ from: accountManagerW11, to: to_add, value: VALUE, position: POSITION1, txtype: 3, txtime: Date.now() }
+                , function (err, res) {
+                    if (err) {
+                        console.log("Error:", err);
+                    } else {
+                        sleep(2000)
+                        console.log("send_inchain--Result:", res);
+                        hash_in = web31.utils.asciiToHex(res);
+                        console.log("send_inchain--hash_in:", hash_in);
+                        // sleep(2000)
+                        console.log("send_inchain--balance:", VALUE)
+                        // send_result_tx(outweb3, ve_id, true, hash_in, outpos);
+                    }
+                });
+            })
+        }
     })
 
     transfContract1.events.IN_Event3(function (error, event) {
-        transfContract.methods.OUT_transf4()
-        .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
-        .then(function (result) {
-            // outweb3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: outpos, txtype: 4, txtime: Date.now(), exdata: txinhash }
-            web3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: POSITION, txtype: 4, txtime: Date.now()}
-            , function (err, res) {
-                if (err) {
-                    console.log("Error:", err);
-                } else {
-                    sleep(2000)
-                    console.log("send_result--Tx_result:", res);
-                    // endtime = new Date().getTime();
-                    // console.log("during--", endtime - starttime)
-                }
-            });
-        })
+        if (error !== null) {
+            console.log("IN_Event3: ", error);
+        }
+        if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+        && event.returnValues.vehicleId.slice(0, 42) == to_add.toLowerCase()
+        ) {
+            // let passengerId = event.returnValues.passengerId;
+    
+            transfContract.methods.OUT_transf4(to_add, from_add)
+            .send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITION, txtime: 278000 })
+            .then(function (result) {
+                // outweb3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: outpos, txtype: 4, txtime: Date.now(), exdata: txinhash }
+                web3.eth.sendTransaction({ from: accountManagerW11, to: from_add, position: POSITION, txtype: 4, txtime: Date.now()}
+                , function (err, res) {
+                    if (err) {
+                        console.log("Error:", err);
+                    } else {
+                        sleep(2000)
+                        console.log("send_result--Tx_result:", res);
+                        // endtime = new Date().getTime();
+                        // console.log("during--", endtime - starttime)
+                    }
+                });
+            })
+        }
     })
 
 
@@ -266,27 +294,6 @@ async function trans_tx(from_add ,to_add) {
                 // console.log("during--", endtime - starttime)
         }
     });
-
-    
-
-	// let hash_req = hashRequests
-    // // const macc_outbal = web3.eth.getBalance(from_add)
-    // const macc_outbal = VALUE
-
-	// console.log("get_outchain_info--outchain_balance:", macc_outbal)
-
-	// web3.eth.sendTransaction({ from: from_add, to: accountManagerW11, value: macc_outbal, position: POSITION, txtype: 2, txtime: Date.now(), exdata: hash_req }
-    // , function (err, res) {
-	// 	if (err) {
-	// 		console.log("Error:", err);
-	// 	} else {
-	// 		sleep(2000);
-	// 		console.log("Result:", res);
-	// 		hash_out = web3.utils.asciiToHex(res);
-	// 		send_inchain_tx(web31, to_add, macc_outbal, hash_out, POSITION1, web3, POSITION);
-	// 	}
-	// });
-    
 }
 
 //4. ama在目标链发送资产转入交易Tx_in
