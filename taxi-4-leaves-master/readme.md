@@ -116,3 +116,22 @@ geth_wx4e/
 子链中存在多个账号，除父链中的账号外，还需额外的90个账号。在日后的测试中，这其中30个会扮演司机，剩余的60个扮演乘客。每位乘客只发送一次乘车请求，但司机可以接收多个乘车请求。
 
 笔者已经构建好了四个子链各自的文件夹和启动脚本。
+
+## 使用步骤记录
+
+1. 执行`python3 GenerateAccountInfo.py`准备测试集，其中`account_use_count`变量意为参与测试的账号数量，可以在不越界的前提下任意指定
+2. 执行`sh clear.sh`清理上次运行的痕迹
+3. 执行`sh wx4e_init.sh`开启父链
+4. 运行`python3 UpdateEnode.py`更新子链的预加载脚本
+5. 执行`sh wx4en_init.sh`等脚本开启子链
+6. 把contracts_abi_wx4.txt里的内容复制到各个子链控制台中，部署合约
+7. 上传地图（可选，不上传只会影响寻路算法，其他功能全部正常）
+8. 启动挖矿。**注意**：本仓库内进行的所有实验全部
+9. 执行`sh run_vehicle.sh 8546 wx4en`，在wx4en上部署车辆，然后执行`sh run_passenger.sh 8546 wx4en`在wx4en上部署乘客，wx4en调度活动开始
+10. 重复上述步骤，为其余三个子链启动调度活动，端口号递增1即可
+11. 结果记录在log_passenger_wx4e?.log、log_vehicle_wx4e?.log、passengers_result_wx4e?.json、vehicles_result_wx4e?.json中
+12. 若想执行基于geth1的不分块实验，执行`sh wx4e_standalone_init.sh`，随后形似第6步部署合约，然后执行`sh run_vehicle.sh 8550 all`和`sh run_passenger.sh 8550 all`
+13. 结果记录在passengers_result_all.json、vehicles_result_all.json中
+
+miner.start(2)
+miner.stop()

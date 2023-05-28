@@ -4,13 +4,13 @@ import requests
 
 code: str = r"""admin.addPeer("%s")
 
-// sleep(10000)
+sleep(10000)
 
 eth.setBranchBlock({from:eth.accounts[0],branchid:"%s",settime:20})
 
 var MAP_NAME = "%s";
 
-// sleep(10000)
+sleep(10000)
 
 // 账户解锁
 for (var i = 0; i < %d; i++) {
@@ -57,7 +57,7 @@ def main():
     result: dict = json.loads(r.text).get("result")
     enode: str = result["enode"]
 
-    unlock_count: int = 96
+    unlock_count: int = 192
 
     generate_script(enode, "wx4en", unlock_count)
     generate_script(enode, "wx4ep", unlock_count)

@@ -1,15 +1,15 @@
-admin.addPeer("enode://69d9bbf552dacf62cf50d22bb6a7fc049d1fd82335adbf1738ccab1ed316937f03d805a23275226f08b4b932b0e49234ed12eccb9cb560c9ae9f6ebb2c6b72a6@127.0.0.1:30309?discport=0")
+admin.addPeer("enode://9d5c30ad1dfe45a9dbcb225a152a3765ffdff1a9b009484411d2eec11d1aa0a7b231e4e1865151f83f6a2d68b7cce58a8254b2f4f9194314395d0f7e050e321b@127.0.0.1:30309?discport=0")
 
-// sleep(10000)
+sleep(10000)
 
 eth.setBranchBlock({from:eth.accounts[0],branchid:"wx4ep",settime:20})
 
 var MAP_NAME = "wx4ep";
 
-// sleep(10000)
+sleep(10000)
 
 // 账户解锁
-for (var i = 0; i < 96; i++) {
+for (var i = 0; i < 192; i++) {
     personal.unlockAccount(eth.accounts[i],"123",30000)
 }
 

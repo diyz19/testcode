@@ -22,7 +22,7 @@ let vehiclesInfo = JSON.parse(fs.readFileSync("./vehicles_info_" + MAP_NAME + ".
 
 let vehicleResultFile = "./vehicle_result_" + MAP_NAME + ".json";
 let vehicleAstarErr1File = "./vehicle_err1_" + MAP_NAME + ".json";
-let vehicleAstarErr2File = "./vehicle_err1_" + MAP_NAME + ".json";
+let vehicleAstarErr2File = "./vehicle_err2_" + MAP_NAME + ".json";
 
 // let runTime = 29 * 60 * 1000;  // 系统运行时间
 let startTime = Date.now();

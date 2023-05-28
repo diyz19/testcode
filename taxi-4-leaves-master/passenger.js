@@ -55,7 +55,7 @@ async function manageVehicleByRegion5() {
         setTimeout(() => {
             console.warn(`${(new Date()).getTime()}@passenger@${accountAddr}@StartProcessing`)
             passengerUnit(accountAddr)
-        }, 3000 * i);
+        }, (MAP_NAME === "all" ? 750 : 3000) * i);
         i++;
     }
 }
