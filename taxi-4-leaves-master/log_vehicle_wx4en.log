@@ -1,6 +1,62 @@
-1685271616572@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@StartProcessing
-1685271638987@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@PickUp@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9000000000000000000000000
-1685271639784@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@FinishedAStarToStartingPoint
-1685271644201@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@StoreRouteToStartingPointThroughAStarSuccess
-1685271648490@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@DestinationReady
-astarErr:  0x196424dd2bf7c978228ebd7a17b38b993d650696送乘客0x12d0e4381ef94a70a49252e35b9a65fadd3872b9000000000000000000000000去终点时导航超时, 起点：wx4enscgue5终点：wx4enrq9mm9
+1685273563031@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@StartProcessing
+1685273563037@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@StartProcessing
+1685273563037@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@StartProcessing
+1685273563038@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@StartProcessing
+1685273588897@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PickUp@0xad8a321e2e8f8f51245f47b8f412979d5740e625000000000000000000000000
+1685273590617@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FinishedAStarToStartingPoint
+1685273591094@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@PickUp@0x91153bad44dcc46187c481d8d36a53e58522d0c4000000000000000000000000
+1685273591097@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@StoreRouteToStartingPointThroughAStarSuccess
+1685273592414@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@FinishedAStarToStartingPoint
+1685273598220@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PickUp@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b000000000000000000000000
+1685273598222@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@StoreRouteToStartingPointThroughAStarSuccess
+1685273598231@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@DestinationReady
+1685273599139@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FinishedAStarToStartingPoint
+1685273603040@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FinishedAStarToDestination
+1685273603625@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@PickUp@0xf4190533e1203597f7cbe83cd76a32192af04ebf000000000000000000000000
+1685273603634@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@PickUp@0xf4190533e1203597f7cbe83cd76a32192af04ebf000000000000000000000000
+1685273603686@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@DestinationReady
+1685273603763@vehicle@0x196424dd2bf7c978228ebd7a17b38b993d650696@DestinationReady
+1685273603766@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@StoreRouteToStartingPointThroughAStarSuccess
+1685273604029@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@FinishedAStarToStartingPoint
+1685273607025@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@FinishedAStarToStartingPoint
+1685273607953@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerPaid
+1685273608156@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@StoreRouteToDestinationSuccess
+1685273608157@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@StoreRouteToStartingPointThroughAStarSuccess
+1685273608157@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@DestinationReady
+1685273608213@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@CarReleased
+astarErr:  0x196424dd2bf7c978228ebd7a17b38b993d650696送乘客0x91153bad44dcc46187c481d8d36a53e58522d0c4000000000000000000000000去终点时导航超时, 起点：wx4enscgue5终点：wx4enrq9mm9
+astarErr:  0x196424dd2bf7c978228ebd7a17b38b993d650696送乘客0x91153bad44dcc46187c481d8d36a53e58522d0c4000000000000000000000000去终点时导航超时, 起点：wx4enscgue5终点：wx4enrq9mm9
+1685273614233@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FinishedAStarToDestination
+1685273625338@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@StoreRouteToStartingPointThroughAStarSuccess
+1685273625341@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@StoreRouteToDestinationSuccess
+1685273625358@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerPaid
+1685273625360@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@DestinationReady
+1685273625431@vehicle@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@CarReleased
+1685273629441@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@FinishedAStarToDestination
+1685273632951@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PickUp@0xc0a3917e5679c0ef9033c41cbe294a212abe55df000000000000000000000000
+1685273632953@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@PassengerPaid
+1685273633173@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@StoreRouteToDestinationSuccess
+1685273633174@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FinishedAStarToStartingPoint
+1685273633175@vehicle@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@DestinationReady
+1685273633221@vehicle@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559@CarReleased
+/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-helpers/lib/errors.js:28
+        var err = new Error('Returned error: ' + message);
+                  ^
+
+Error: Returned error: method handler crashed
+    at Object.ErrorResponse (/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-helpers/lib/errors.js:28:19)
+    at Object.callback (/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:291:36)
+    at /home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/web3-providers-ws/lib/index.js:114:45
+    at Array.forEach (<anonymous>)
+    at WebsocketProvider._onMessage (/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/web3-providers-ws/lib/index.js:102:69)
+    at W3CWebSocket._dispatchEvent [as dispatchEvent] (/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/yaeti/lib/EventTarget.js:115:12)
+    at W3CWebSocket.onMessage (/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:234:14)
+    at WebSocketConnection.<anonymous> (/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:205:19)
+    at WebSocketConnection.emit (node:events:513:28)
+    at WebSocketConnection.processFrame (/home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/WebSocketConnection.js:554:26)
+    at /home/dyz/dyz/testcode/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/WebSocketConnection.js:323:40
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  data: null
+}
+
+Node.js v18.15.0
