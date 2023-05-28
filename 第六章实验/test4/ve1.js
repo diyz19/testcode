@@ -37,7 +37,7 @@ let astarErr2Messages = [];
 // const GAS_OFFER = 50_0000_0000
 // const GAS_OFFER = 1
 const GAS_OFFER = 500_0000
-const VALUE = 100_0000_0000_00000
+const VALUE = 100_0000_0000_0000
 const accountManagerW11 = "0x196424dd2bf7c978228ebd7a17b38b993d650696"
 // 892_8260_0000_0000
 // 49999992826000000000

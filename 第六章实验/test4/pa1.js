@@ -77,7 +77,7 @@ let transfContractlist = [transfContract, transfContract1, transfContract2];
 // const FROM = "wx4er200z2r"
 // const TO = "wx4erw9rnsr"
 const GAS_OFFER = 500_0000
-const VALUE = 100_0000_0000_00000
+const VALUE = 100_0000_0000_0000
 const accountManagerW11 = "0x196424dd2bf7c978228ebd7a17b38b993d650696"
 let ttt = "0xc0a3917e5679c0ef9033c41cbe294a212abe55df";
 
@@ -174,8 +174,7 @@ async function getOff(passengerId, vehicleId, VeRe) {
     // })
     // .then(function(receipt){
     // trans_tx(passengerId ,vehicleId, weblist[VeRe]).then(function (result) {
-        trafficContractlist[VeRe].methods.confirmPay(vehicleId).send({ from: accountManagerW11, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }).then(function (result) {
-    // trafficContractlist[VeRe].methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }).then(function (result) {
+    trafficContractlist[VeRe].methods.confirmPay(vehicleId).send({ from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }).then(function (result) {
         console.log("乘客确认交易结束");
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerPaysAndGetsOff`)
     })
@@ -196,9 +195,8 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
     trafficContractlist[VeRe].methods.getVehicle(
         weblist[VeRe].utils.asciiToHex(positionGeohash)
     )    
-    .call(        
-        { from: accountManagerW11, gas: GAS_OFFER }
-        // { from: passengerId, gas: GAS_OFFER }
+    .call(
+        { from: passengerId, gas: GAS_OFFER }
     ).then(async function (result1) {
         console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@FoundTheMostNearbyCar`)
         // console.log("result1[0]: ", result1[0])
@@ -222,8 +220,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
             result1[1], passengerId, weblist[VeRe].utils.asciiToHex(positionGeohash)
         )
         .send(
-            { from: accountManagerW11, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
-            // { from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
+            { from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
         )
         .then(function (result2) {
             console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@TheMostNearbyCarIsSelected`)
@@ -257,9 +254,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
                         trafficContractlist[VeRe].methods.Start_Begin(
                             ve1, passengerId, event.returnValues.passengerGeohash 
                             ).send(
-                                { from: accountManagerW11, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
-
-                            // { from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
+                            { from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
                             ).then(function (result) {
                             console.log("乘客支付了订单");
                             console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerPaysAndGetsOff`)
@@ -283,10 +278,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
                     if (isboard == false) {
                         isboard = true
                         trafficContractlist[VeRe].methods.confirmBoard(passengerMessage.vehicleId).send(
-                            { from: accountManagerW11, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
-
-                            // { from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
-                            
+                            { from: passengerId, gas: GAS_OFFER, position: POSITIONLIST[VeRe], txtime: 278000 }
                         ).then(function (result) {
                             console.log(`乘客${passengerId}确认上车`)
                             console.warn(`${(new Date()).getTime()}@passenger@${passengerId}@PassengerOnBoard`)
@@ -324,11 +316,6 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
                         getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe + 1)
                     }, 1000 + 4000 * count)
                 }else{
-                    // if(VeRe + 1 == 3){
-                    //     setTimeout(function () {
-                    //         getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe - 1)
-                    //     }, 1000 + 4000 * count)
-                    // }
                     setTimeout(function () {
                         getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe)
                     }, 1000 + 4000 * count)

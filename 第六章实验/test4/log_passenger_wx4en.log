@@ -1,25 +1,47 @@
-1685069748555@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@StartProcessing
-1685069750667@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@StartingPointWrittenToContract
-1685069751553@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@StartProcessing
-1685069755734@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@StartingPointWrittenToContract
-1685069755736@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@DestinationWrittenToContract
-1685069755740@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundIdleCarsNearby
-1685069755745@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundTheMostNearbyCar
-1685069755796@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundTheMostNearbyCar
-1685069758528@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@DestinationWrittenToContract
-1685069758530@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundIdleCarsNearby
-1685069758546@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundTheMostNearbyCar
-1685069758580@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundTheMostNearbyCar
-1685069767906@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@TheMostNearbyCarIsSelected
-1685069767908@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@TheMostNearbyCarConflict
-1685069772892@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerPaysAndGetsOff
-1685069773599@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundTheMostNearbyCar
-1685069777498@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@TheMostNearbyCarConflict
-1685069780202@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerOnBoard
-1685069780456@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerArriveAtDestination
-1685069786451@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerPaysAndGetsOff
-1685069786518@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundTheMostNearbyCar
-1685069790480@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@TheMostNearbyCarIsSelected
-1685069803591@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerOnBoard
-1685069807204@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerArriveAtDestination
-1685069810233@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerPaysAndGetsOff
+1685308026392@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@StartProcessing
+1685308028139@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@StartingPointWrittenToContract
+1685308029396@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@StartProcessing
+1685308040254@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@DestinationWrittenToContract
+1685308040256@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@StartingPointWrittenToContract
+1685308040273@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundIdleCarsNearby
+1685308040615@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundTheMostNearbyCar
+1685308040679@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@FoundTheMostNearbyCar
+1685308043698@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@TheMostNearbyCarIsSelected
+1685308045665@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@DestinationWrittenToContract
+1685308045666@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundIdleCarsNearby
+1685308045677@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundTheMostNearbyCar
+1685308045686@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundTheMostNearbyCar
+1685308048393@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerPaysAndGetsOff
+1685308048402@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@TheMostNearbyCarConflict
+1685308053570@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundTheMostNearbyCar
+1685308061933@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerOnBoard
+1685308061933@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@TheMostNearbyCarConflict
+1685308063937@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerArriveAtDestination
+1685308070609@passenger@0x12d0e4381ef94a70a49252e35b9a65fadd3872b9@PassengerPaysAndGetsOff
+1685308071042@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@FoundTheMostNearbyCar
+1685308076241@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@TheMostNearbyCarIsSelected
+1685308080537@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerPaysAndGetsOff
+1685308088418@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerOnBoard
+1685308092372@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerArriveAtDestination
+1685308099042@passenger@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4@PassengerPaysAndGetsOff
+/home/dyz/dyz/main/taxi-4-leaves-master/test4/pa.js:650
+        if (event.returnValues.passengerId.slice(0, 42) == from_add.toLowerCase()
+                               ^
+
+TypeError: Cannot read properties of undefined (reading 'passengerId')
+    at Subscription.callback (/home/dyz/dyz/main/taxi-4-leaves-master/test4/pa.js:650:32)
+    at Object.callback (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-subscriptions/lib/subscription.js:248:27)
+    at /home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:108:34
+    at Map.forEach (<anonymous>)
+    at WebsocketProvider.disconnect (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:107:37)
+    at WebsocketProvider.emit (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/eventemitter3/index.js:181:35)
+    at WebsocketProvider._onClose (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-providers-ws/lib/index.js:152:10)
+    at W3CWebSocket._dispatchEvent [as dispatchEvent] (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/yaeti/lib/EventTarget.js:115:12)
+    at W3CWebSocket.onClose (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:228:10)
+    at WebSocketConnection.<anonymous> (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:201:17)
+    at WebSocketConnection.emit (node:events:513:28)
+    at WebSocketConnection.handleSocketClose (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/WebSocketConnection.js:389:14)
+    at Socket.emit (node:events:513:28)
+    at TCP.<anonymous> (node:net:322:12)
+
+Node.js v18.15.0

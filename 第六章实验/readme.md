@@ -127,18 +127,57 @@ geth_wx4e/
 6. 把contracts_abi_wx4.txt里的内容复制到各个子链控制台中，部署合约
 7. 上传地图（可选，不上传只会影响寻路算法，其他功能全部正常）
 8. 启动挖矿。**注意**：本仓库内进行的所有实验全部
-9. 执行`sh run_vehicle.sh 8546 wx4en`，在wx4en上部署车辆，然后执行`sh run_passenger.sh 8546 wx4en`在wx4en上部署乘客，wx4en调度活动开始
+
+sh run_ve.sh 8547 wx4ep
+sh run_pa.sh 8546 wx4en
+sh run_ve.sh 8548 wx4eq
+
+9.  执行`sh run_vehicle.sh 8546 wx4en`，在wx4en上部署车辆，然后执行`sh run_passenger.sh 8546 wx4en`在wx4en上部署乘客，wx4en调度活动开始
 10. 重复上述步骤，为其余三个子链启动调度活动，端口号递增1即可
 11. 结果记录在log_passenger_wx4e?.log、log_vehicle_wx4e?.log、passengers_result_wx4e?.json、vehicles_result_wx4e?.json中
 12. 若想执行基于geth1的不分块实验，执行`sh wx4e_standalone_init.sh`，随后形似第6步部署合约，然后执行`sh run_vehicle.sh 8550 all`和`sh run_passenger.sh 8550 all`
 13. 结果记录在passengers_result_all.json、vehicles_result_all.json中
 
+sh run_pa.sh 8546 wx4en
+miner.start(2)
+miner.stop()
 eth.getAccountByRegion('wx4en')
+eth.getAccountByRegion('wx4ep')
+for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
+console.log(eth.getBalance("0x196424dd2bf7c978228ebd7a17b38b993d650696")) 
 
-for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[0])) }
 console.log(eth.getBalance("0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559")) 
 console.log(eth.getBalance("0xc0a3917e5679c0ef9033c41cbe294a212abe55df"))
 console.log(eth.getBalance("0x55577fd620a0b8379846fcb1499e4bdc22538843"))
+console.log(eth.getBalance("0x12d0e4381ef94a70a49252e35b9a65fadd3872b9"))
+console.log(eth.getBalance("0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4"))
 
+console.log(eth.getBalance("0xe64e81bc77ee05caaa6b1476de75193607e84d87")) 
+console.log(eth.getBalance("0x7a68b86008b0cfc3ae0e8068360271cbb999c97d"))
+console.log(eth.getBalance("0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b"))
+console.log(eth.getBalance("0xf4190533e1203597f7cbe83cd76a32192af04ebf"))
+console.log(eth.getBalance("0xad8a321e2e8f8f51245f47b8f412979d5740e625")) 
+console.log(eth.getBalance("0x91153bad44dcc46187c481d8d36a53e58522d0c4"))
 
 console.log(eth.getBalance("0x12d0e4381ef94a70a49252e35b9a65fadd3872b9"))
+console.log(eth.getBalance("0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4"))
+console.log(eth.getBalance("0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559")) 
+console.log(eth.getBalance("0xad8a321e2e8f8f51245f47b8f412979d5740e625")) 
+
+
+
+
+
+0x7a68b86008b0cfc3ae0e8068360271cbb999c97d
+0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b
+
+0xd402c7301a68c4c65529ab0c597bb8b13e27f607
+0x42389309e69a2b32b98f04bc8255ad971797f757
+
+
+0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559
+0xc0a3917e5679c0ef9033c41cbe294a212abe55df
+0x55577fd620a0b8379846fcb1499e4bdc22538843
+0xad8a321e2e8f8f51245f47b8f412979d5740e625
+0x91153bad44dcc46187c481d8d36a53e58522d0c4
+0xe64e81bc77ee05caaa6b1476de75193607e84d87
