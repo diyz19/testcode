@@ -1,0 +1,92 @@
+---parent.Number:0, branchb.RegionId:w1,ptd:131072---
+Welcome to the Geth JavaScript console!
+
+instance: Geth/MyEth/v1.9.12-stable-775ced92/linux-amd64/go1.13.9
+coinbase: 0x196424dd2bf7c978228ebd7a17b38b993d650696
+at block: 1 (Thu Jan 01 1970 08:00:10 GMT+0800 (CST))
+ datadir: /home/zc/20230203-treechain_expermiment/transfer-2leaf/geth_w1/gethdata
+ modules: admin:1.0 debug:1.0 eth:1.0 ethash:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> BroadcastBranchBlock==transfer.networkID:w11==
+---parent.Number:1, branchb.RegionId:w11,ptd:262144---
+****localTd:262144,externTd:393216****
+---parent.Number:1, branchb.RegionId:w12,ptd:262144---
+****localTd:393216,externTd:393216****
+****localTd:393216,externTd:524288****
+****localTd:524288,externTd:655424****
+****localTd:655424,externTd:786624****
+****localTd:786624,externTd:524288****
+****localTd:524288,externTd:655424****
+****localTd:655424,externTd:786624****
+****localTd:786624,externTd:917888****
+****localTd:917888,externTd:1049216****
+****localTd:1049216,externTd:1180608****
+****localTd:1180608,externTd:1312064****
+****localTd:1312064,externTd:917888****
+****localTd:917888,externTd:1049216****
+****localTd:1049216,externTd:1443584****
+****localTd:1443584,externTd:1575168****
+****localTd:1575168,externTd:1180608****
+--handler-TX_request--
+***---add---***
+***---from:[149 252 187 186 5 133 139 83 184 41 54 26 5 36 80 23 157 122 98 202]---***
+--handler-TX_request--
+***---add---***
+***---from:[18 208 228 56 30 249 74 112 164 146 82 227 91 154 101 250 221 56 114 185]---***
+****localTd:1180608,externTd:1312064****
+****localTd:1312064,externTd:1443584****
+****localTd:1575168,externTd:1706816****
+****localTd:1706816,externTd:1838528****
+****localTd:1838528,externTd:1575168****
+****localTd:1575168,externTd:1970304****
+****localTd:1970304,externTd:2102144****
+****localTd:2102144,externTd:1706816****
+****localTd:1706816,externTd:1838528****
+****localTd:1838528,externTd:2234048****
+****localTd:2234048,externTd:2366016****
+****localTd:2366016,externTd:1970304****
+****localTd:1970304,externTd:2102144****
+****localTd:2102144,externTd:2498048****
+****localTd:2498048,externTd:2630144****
+****localTd:2630144,externTd:2762304****
+****localTd:2762304,externTd:2894528****
+****localTd:2894528,externTd:3026816****
+****localTd:3026816,externTd:3159168****
+****localTd:3159168,externTd:3291584****
+****localTd:3291584,externTd:2234048****
+****localTd:2234048,externTd:2365952****
+****localTd:2365952,externTd:2497920****
+****localTd:2497920,externTd:2629952****
+****localTd:2629952,externTd:2762048****
+****localTd:2762048,externTd:2894208****
+****localTd:2894208,externTd:3424064****
+****localTd:3424064,externTd:3556608****
+****localTd:3556608,externTd:3689216****
+****localTd:3689216,externTd:3821888****
+****localTd:3821888,externTd:3026432****
+****localTd:3026432,externTd:3158720****
+****localTd:3158720,externTd:3291072****
+****localTd:3291072,externTd:3423488****
+****localTd:3821888,externTd:3954624****
+****localTd:3954624,externTd:4087424****
+****localTd:4087424,externTd:4220288****
+****localTd:4220288,externTd:3555968****
+****localTd:3555968,externTd:3688512****
+****localTd:3688512,externTd:3821120****
+****localTd:3821120,externTd:3953792****
+****localTd:3953792,externTd:4086528****
+****localTd:4220288,externTd:4353216****
+****localTd:4353216,externTd:4486208****
+****localTd:4486208,externTd:4619264****
+****localTd:4619264,externTd:4219328****
+****localTd:4219328,externTd:4352192****
+****localTd:4352192,externTd:4485120****
+****localTd:4485120,externTd:4618112****
+****localTd:4618112,externTd:4752384****
+****localTd:4618112,externTd:4751168****
+****localTd:4752384,externTd:4885569****
+****localTd:4885569,externTd:5018819****
+****localTd:5018819,externTd:4884288****
+****localTd:4884288,externTd:5017473****
+****localTd:5017473,externTd:5150723****
+****localTd:5150723,externTd:5284038****

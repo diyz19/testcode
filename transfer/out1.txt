@@ -1,0 +1,1 @@
+\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"addresspayable\",\"name\":\"to_add\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"}]
