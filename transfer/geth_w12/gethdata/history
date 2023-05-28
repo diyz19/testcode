@@ -198,3 +198,7 @@ miner.stop()
 miner.start(1)
 miner.stop()
 for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
+miner.start()
+for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
+miner.stop()
+for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
