@@ -7,7 +7,7 @@ geth_wx4e_sdl/gethdata
 
 passengers_info*
 vehicles_info*
-log_*
+
 wx4e*addPeer.js
 vehicle_err*
 vehicle_result*
