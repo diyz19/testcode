@@ -319,19 +319,21 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
             if (count < 100) {
                 // $("#vehicleEvent").val("调度车辆中");
                 console.log("调度车辆中2");
-                if(count > 1 && (VeRe + 1) < 3){
-                    setTimeout(function () {
-                        getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe + 1)
-                    }, 1000 + 4000 * count)
+                // if(count > 3 && (VeRe + 1) < 3){
+                if((VeRe + 1) < 3){
+                    sleep(5000)
+                    // setTimeout(function () {
+                    getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe + 1)
+                    // }, 1000 + 4000 * count)
                 }else{
-                    // if(VeRe + 1 == 3){
-                    //     setTimeout(function () {
-                    //         getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe - 1)
-                    //     }, 1000 + 4000 * count)
-                    // }
-                    setTimeout(function () {
-                        getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe)
-                    }, 1000 + 4000 * count)
+                    if(VeRe + 1 == 3){
+                        sleep(5000)
+                        // setTimeout(function () {
+                        getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe - 1)
+                    }
+                    // setTimeout(function () {
+                    //     getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe)
+                    // }, 1000 + 4000 * count)
                 }
                 //10000 + 4000 * count
             } else {

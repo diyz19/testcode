@@ -1,30 +1,26 @@
-1685308020004@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@StartProcessing
-1685308080310@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@PickUp@0x456c4df0610c7611ae8bcaed32dd1d94e88ceca4000000000000000000000000
-1685308080529@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@FinishedAStarToStartingPoint
-1685308080814@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@StoreRouteToStartingPointThroughAStarSuccess
-1685308088639@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@DestinationReady
-1685308088984@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@FinishedAStarToDestination
-1685308092382@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@StoreRouteToDestinationSuccess
-1685308099031@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@PassengerPaid
-1685308099063@vehicle@0xad8a321e2e8f8f51245f47b8f412979d5740e625@CarReleased
-/home/dyz/dyz/main/taxi-4-leaves-master/test4/ve.js:95
-        console.log("Myevent_vehicleId:",event.returnValues.vehicleId);
-                                                            ^
-
-TypeError: Cannot read properties of undefined (reading 'vehicleId')
-    at Subscription.callback (/home/dyz/dyz/main/taxi-4-leaves-master/test4/ve.js:95:61)
-    at Object.callback (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-subscriptions/lib/subscription.js:248:27)
-    at /home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:108:34
-    at Map.forEach (<anonymous>)
-    at WebsocketProvider.disconnect (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:107:37)
-    at WebsocketProvider.emit (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/eventemitter3/index.js:181:35)
-    at WebsocketProvider._onClose (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/web3-providers-ws/lib/index.js:152:10)
-    at W3CWebSocket._dispatchEvent [as dispatchEvent] (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/yaeti/lib/EventTarget.js:115:12)
-    at W3CWebSocket.onClose (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:228:10)
-    at WebSocketConnection.<anonymous> (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/W3CWebSocket.js:201:17)
-    at WebSocketConnection.emit (node:events:513:28)
-    at WebSocketConnection.handleSocketClose (/home/dyz/dyz/main/taxi-4-leaves-master/node_modules/web3/node_modules/websocket/lib/WebSocketConnection.js:389:14)
-    at Socket.emit (node:events:513:28)
-    at TCP.<anonymous> (node:net:322:12)
-
-Node.js v18.15.0
+1685311128837@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@StartProcessing
+1685311128843@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@StartProcessing
+1685311161501@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@PickUp@0xc0a3917e5679c0ef9033c41cbe294a212abe55df000000000000000000000000
+1685311161508@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@FinishedAStarToStartingPoint
+1685311166507@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@StoreRouteToStartingPointThroughAStarSuccess
+1685311169105@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@PickUp@0xad8a321e2e8f8f51245f47b8f412979d5740e625000000000000000000000000
+1685311169110@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@FinishedAStarToStartingPoint
+1685311170466@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@DestinationReady
+1685311170471@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@FinishedAStarToDestination
+1685311178009@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@StoreRouteToDestinationSuccess
+1685311178010@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@StoreRouteToStartingPointThroughAStarSuccess
+1685311180757@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@PassengerPaid
+1685311180766@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@DestinationReady
+1685311180768@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@FinishedAStarToDestination
+1685311180769@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@CarReleased
+1685311182307@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@StoreRouteToDestinationSuccess
+1685311185447@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@PassengerPaid
+1685311186042@vehicle@0xd402c7301a68c4c65529ab0c597bb8b13e27f607@CarReleased
+1685311193861@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@PickUp@0xe64e81bc77ee05caaa6b1476de75193607e84d87000000000000000000000000
+1685311193870@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@FinishedAStarToStartingPoint
+1685311197777@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@StoreRouteToStartingPointThroughAStarSuccess
+1685311201135@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@DestinationReady
+1685311201137@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@FinishedAStarToDestination
+1685311207078@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@StoreRouteToDestinationSuccess
+1685311211539@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@PassengerPaid
+1685311211595@vehicle@0x42389309e69a2b32b98f04bc8255ad971797f757@CarReleased
