@@ -57,7 +57,7 @@ def main():
     result: dict = json.loads(r.text).get("result")
     enode: str = result["enode"]
 
-    unlock_count: int = 192
+    unlock_count: int = 48
 
     generate_script(enode, "wx4en", unlock_count)
     generate_script(enode, "wx4ep", unlock_count)

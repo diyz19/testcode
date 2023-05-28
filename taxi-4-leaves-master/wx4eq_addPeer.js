@@ -1,4 +1,4 @@
-admin.addPeer("enode://9d5c30ad1dfe45a9dbcb225a152a3765ffdff1a9b009484411d2eec11d1aa0a7b231e4e1865151f83f6a2d68b7cce58a8254b2f4f9194314395d0f7e050e321b@127.0.0.1:30309?discport=0")
+admin.addPeer("enode://1c4125ab5bc3d09c21f10c18997d677d48e99e81c51ad9664814d8faa947b8db458a70e824b2dd5037d8e1adb4c3bb4f3f0eb5c125a22afed3df5f161ee5a4eb@127.0.0.1:30309?discport=0")
 
 sleep(10000)
 
@@ -9,7 +9,7 @@ var MAP_NAME = "wx4eq";
 sleep(10000)
 
 // 账户解锁
-for (var i = 0; i < 192; i++) {
+for (var i = 0; i < 48; i++) {
     personal.unlockAccount(eth.accounts[i],"123",30000)
 }
 
