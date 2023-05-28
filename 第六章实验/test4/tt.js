@@ -111,7 +111,9 @@ if (process.argv.length === 4) {
     //         console.log("getAccountByRegion_Wrong!!!!!: ",region);
     //     }
     // })
-    trans_tx(pa_id, ve_id);
+    // trans_tx(pa_id, ve_id);
+    trans_tx(pa_id, pa_id);
+
     console.log("done!");
 } else {
     console.error("ArguemntError");

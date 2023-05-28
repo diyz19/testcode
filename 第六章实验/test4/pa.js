@@ -51,7 +51,7 @@ let transfContractAddress = '0x5d9ec06ef6f5384c50886174a88db14624017340';
 let transfContractAbi = JSON.parse(fs.readFileSync('./transfContractAbi.json', 'utf-8'));
 let transfContract = new web3.eth.Contract(transfContractAbi, transfContractAddress);
 let transfContract1 = new web31.eth.Contract(transfContractAbi, transfContractAddress);
-let transfContract2 = new web32.eth.Contract(trafficContractAbi, trafficContractAddress);
+let transfContract2 = new web32.eth.Contract(transfContractAbi, transfContractAddress);
 
 
 let passengersInfo = JSON.parse(fs.readFileSync("./passengers_info_" + MAP_NAME + ".json", "utf-8"));

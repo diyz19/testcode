@@ -296,7 +296,7 @@ async function getVehicleByRegion(passengerId, positionGeohash, regionVehiclesli
             if (count < 100) {
                 // $("#vehicleEvent").val("调度车辆中");
                 console.log("调度车辆中2");
-                if(count > 1 && (VeRe + 1) < 3){
+                if(count > 3 && (VeRe + 1) < 3){
                     setTimeout(function () {
                         getVehicleByRegion(passengerId, positionGeohash, regionVehicleslist, passengerMessage, count, VeRe + 1)
                     }, 1000 + 4000 * count)
