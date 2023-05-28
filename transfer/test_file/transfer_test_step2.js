@@ -1,5 +1,7 @@
 // var transferjs = require("./transfer_test2_large");
-var transferjs = require("./new");
+var transferjs = require("./transfer_test2");
+
+// var transferjs = require("./new");
 //init
 // transferjs.init_tx();
 
