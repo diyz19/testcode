@@ -1,26 +1,41 @@
-1685311127590@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@StartProcessing
-1685311127617@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StartProcessing
-1685311147056@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@PickUp@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559000000000000000000000000
-1685311147062@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@FinishedAStarToStartingPoint
-1685311151042@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StoreRouteToStartingPointThroughAStarSuccess
-1685311152043@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@PickUp@0x55577fd620a0b8379846fcb1499e4bdc22538843000000000000000000000000
-1685311152046@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@FinishedAStarToStartingPoint
-1685311153092@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@DestinationReady
-1685311153100@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@FinishedAStarToDestination
-1685311154198@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@StoreRouteToStartingPointThroughAStarSuccess
-1685311154784@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StoreRouteToDestinationSuccess
-1685311160247@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@PassengerPaid
-1685311160255@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@DestinationReady
-1685311160260@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@FinishedAStarToDestination
-1685311160263@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@CarReleased
-1685311164042@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@StoreRouteToDestinationSuccess
-1685311173153@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@PassengerPaid
-1685311173259@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@CarReleased
-1685311183430@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@PickUp@0x91153bad44dcc46187c481d8d36a53e58522d0c4000000000000000000000000
-1685311183442@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@FinishedAStarToStartingPoint
-1685311185097@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StoreRouteToStartingPointThroughAStarSuccess
-1685311187541@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@DestinationReady
-1685311187544@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@FinishedAStarToDestination
-1685311190713@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StoreRouteToDestinationSuccess
-1685311192042@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@PassengerPaid
-1685311192586@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@CarReleased
+1686171553802@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@StartProcessing
+1686171553808@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StartProcessing
+1686171573787@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@PickUp@0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559000000000000000000000000
+1686171573791@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@FinishedAStarToStartingPoint
+1686171574870@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@StoreRouteToStartingPointThroughAStarSuccess
+1686171576110@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@DestinationReady
+1686171576112@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@FinishedAStarToDestination
+1686171577959@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@StoreRouteToDestinationSuccess
+1686171579723@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@PickUp@0x55577fd620a0b8379846fcb1499e4bdc22538843000000000000000000000000
+1686171579738@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@FinishedAStarToStartingPoint
+1686171582014@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@PassengerPaid
+1686171583427@vehicle@0x7a68b86008b0cfc3ae0e8068360271cbb999c97d@CarReleased
+1686171584261@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StoreRouteToStartingPointThroughAStarSuccess
+1686171598779@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@PassengerPaid
+1686171598833@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@DestinationReady
+1686171598867@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@FinishedAStarToDestination
+1686171598870@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@CarReleased
+1686171600598@vehicle@0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b@StoreRouteToDestinationSuccess
+/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-abi/lib/index.js:239
+            if (param.substring(0, 2) === '0x') {
+                      ^
+
+TypeError: Cannot read properties of undefined (reading 'substring')
+    at ABICoder.formatParam (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-abi/lib/index.js:239:23)
+    at /home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-abi/lib/index.js:100:22
+    at Array.map (<anonymous>)
+    at ABICoder.encodeParameters (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-abi/lib/index.js:94:21)
+    at /home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-contract/lib/index.js:439:20
+    at Array.map (<anonymous>)
+    at Object._encodeMethodABI (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-contract/lib/index.js:438:8)
+    at Object._processExecuteArguments (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-contract/lib/index.js:701:39)
+    at Object._executeMethod (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-contract/lib/index.js:720:68)
+    at manageToEnd (/home/dyz/dyz/testcode/第六章实验/test4/ve.js:348:58)
+    at Subscription.callback (/home/dyz/dyz/testcode/第六章实验/test4/ve.js:208:13)
+    at Subscription.subscriptionHandler (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-eth-contract/lib/index.js:616:26)
+    at /home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-core-subscriptions/lib/subscription.js:238:83
+    at Array.forEach (<anonymous>)
+    at Object.callback (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-core-subscriptions/lib/subscription.js:233:28)
+    at WebsocketProvider.data (/home/dyz/dyz/testcode/第六章实验/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:89:69)
+
+Node.js v18.15.0

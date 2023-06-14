@@ -1,18 +1,20 @@
-=============== May 28, 2023 (CST) ===============
-20:42:28.657367 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-20:42:28.661195 db@open opening
-20:42:28.661754 version@stat F·[] S·0B[] Sc·[]
-20:42:28.664233 db@janitor F·2 G·0
-20:42:28.664249 db@open done T·3.041028ms
-20:42:28.668184 db@close closing
-20:42:28.668206 db@close done T·21.861µs
-=============== May 28, 2023 (CST) ===============
-20:42:28.782076 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-20:42:28.782213 version@stat F·[] S·0B[] Sc·[]
-20:42:28.792228 db@open opening
-20:42:28.792298 journal@recovery F·1
-20:42:28.804021 journal@recovery recovering @1
-20:42:28.807346 memdb@flush created L0@2 N·21 S·1KiB "!\x86\xb6..\xf5\xb6\xa9,v5":"\xd1b\x11..\xb0\x89\xd4,v7"
-20:42:28.810719 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
-20:42:28.824354 db@janitor F·3 G·0
-20:42:28.824371 db@open done T·32.126127ms
+=============== Jun 7, 2023 (CST) ===============
+11:36:02.012664 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:36:02.017259 db@open opening
+11:36:02.017779 version@stat F·[] S·0B[] Sc·[]
+11:36:02.020360 db@janitor F·2 G·0
+11:36:02.020391 db@open done T·3.109157ms
+11:36:02.021642 db@close closing
+11:36:02.021695 db@close done T·48.327µs
+=============== Jun 7, 2023 (CST) ===============
+11:36:02.142608 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:36:02.143124 version@stat F·[] S·0B[] Sc·[]
+11:36:02.143316 db@open opening
+11:36:02.143638 journal@recovery F·1
+11:36:02.151443 journal@recovery recovering @1
+11:36:02.154321 memdb@flush created L0@2 N·21 S·1KiB "!\x86\xb6..\xf5\xb6\xa9,v5":"\xd1b\x11..\xb0\x89\xd4,v7"
+11:36:02.157592 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+11:36:02.169406 db@janitor F·3 G·0
+11:36:02.169426 db@open done T·26.094418ms
+11:45:19.981465 db@close closing
+11:45:19.983858 db@close done T·2.392881ms

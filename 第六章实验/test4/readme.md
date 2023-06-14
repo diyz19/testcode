@@ -170,14 +170,21 @@ console.log(eth.getBalance("0xad8a321e2e8f8f51245f47b8f412979d5740e625"))
 
 console.log(eth.getBalance("0x7a68b86008b0cfc3ae0e8068360271cbb999c97d"))
 console.log(eth.getBalance("0xd5f5ef5ff4c6323c62bdc5ab2061f440aefc511b"))
+
 console.log(eth.getBalance("0xd402c7301a68c4c65529ab0c597bb8b13e27f607"))
 console.log(eth.getBalance("0x42389309e69a2b32b98f04bc8255ad971797f757"))
+
 console.log(eth.getBalance("0xdedee68f2020c0d3f98d2a8c23b6563f7b97e559"))
 console.log(eth.getBalance("0xc0a3917e5679c0ef9033c41cbe294a212abe55df"))
 console.log(eth.getBalance("0x55577fd620a0b8379846fcb1499e4bdc22538843"))
 console.log(eth.getBalance("0xad8a321e2e8f8f51245f47b8f412979d5740e625"))
 console.log(eth.getBalance("0x91153bad44dcc46187c481d8d36a53e58522d0c4"))
 console.log(eth.getBalance("0xe64e81bc77ee05caaa6b1476de75193607e84d87"))
+
+
+
+
+
 
 > console.log(eth.getBalance("0x7a68b86008b0cfc3ae0e8068360271cbb999c97d"))
 50000000000000000000

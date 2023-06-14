@@ -58,7 +58,7 @@ def main():
     enode: str = result["enode"]
 
     # unlock_count: int = 192
-    unlock_count: int = 12
+    unlock_count: int = 120
 
     generate_script(enode, "wx4en", unlock_count)
     generate_script(enode, "wx4ep", unlock_count)

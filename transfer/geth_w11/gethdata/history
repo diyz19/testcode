@@ -249,3 +249,11 @@ for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.a
 miner.start()
 miner.stop()
 for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
+miner.start(1)
+for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
+miner.stop()miner.stop()
+miner.stop()
+for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
+miner.start(2)
+for (var i = 0; i < eth.accounts.length; i++) { console.log(eth.getBalance(eth.accounts[i])) }
+miner.stop()
